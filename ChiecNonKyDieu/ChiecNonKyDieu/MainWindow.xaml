@@ -6,31 +6,18 @@
         xmlns:local="clr-namespace:ChiecNonKyDieu"
         mc:Ignorable="d"
         Title="MainWindow" Height="606" Width="1076">
-    <Grid>
+    <Grid KeyUp="Grid_KeyUp">
         <Grid.Background>
             <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/background.png"/>
         </Grid.Background>
-        <Canvas x:Name="vongQuay" HorizontalAlignment="Left" Height="345" Margin="339,79,0,0" VerticalAlignment="Top" Width="391" RenderTransformOrigin="0.5,0.5">
+        <Canvas x:Name="cvVongQuay" HorizontalAlignment="Left" Height="345" Margin="339,79,0,0" VerticalAlignment="Top" Width="391" RenderTransformOrigin="0.5,0.5" MouseUp="cvVongQuay_MouseUp">
             <Canvas.RenderTransform>
                 <RotateTransform x:Name="TransRotate" CenterX="0" CenterY="0" Angle="0" />
             </Canvas.RenderTransform>
-            <Canvas.Resources>
-                <Storyboard x:Key="spin">
-                    <DoubleAnimation x:Name="da" 
-                                Storyboard.TargetName="TransRotate" 
-                                Storyboard.TargetProperty="Angle"
-                                By="360" 
-                                Duration="0:2:0"  
-                                AutoReverse="False" 
-                                 />
-                </Storyboard>
-            </Canvas.Resources>
-
 
             <Canvas.Background>
                 <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/vongquay.png" Stretch="Uniform"/>
             </Canvas.Background>
         </Canvas>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="87" Margin="20,18,0,0" VerticalAlignment="Top" Width="137" Click="button_Click"/>
     </Grid>
 </Window>

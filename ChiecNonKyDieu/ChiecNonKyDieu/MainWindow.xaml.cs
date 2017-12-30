@@ -1,13 +1,16 @@
-﻿using System;
+﻿using ChiecNonKyDieu.Component;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -24,16 +27,42 @@ namespace ChiecNonKyDieu
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
         }
 
-        int s = 90;
+        IVongQuay vongQuay;
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            vongQuay = new VongQuay(this.TransRotate);
+            //ComponentDispatcher.ThreadIdle += new System.EventHandler(ComponentDispatcher_ThreadIdle);
+            //Application.id
+        }
+
+        //int v = 360;
+        //private void ComponentDispatcher_ThreadIdle(object sender, EventArgs e)
+        //{
+        //    if (v <= 0)
+        //        return;
+
+        //    TransRotate.Angle = v--;
+        //}
+
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard sb = (Storyboard)this.vongQuay.FindResource("spin");
-            sb.Begin();
-            sb.SetSpeedRatio(s);
-            s -= 5;
+            vongQuay.Start(100);
         }
-         
+
+        private void cvVongQuay_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            vongQuay.Start(100);
+
+        }
+
+        private void Grid_KeyUp(object sender, KeyEventArgs e)
+        {
+            TransRotate.Angle += 1;
+            Console.WriteLine(TransRotate);
+        }
     }
 }
