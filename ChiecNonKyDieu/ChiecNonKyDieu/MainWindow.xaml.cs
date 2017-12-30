@@ -26,55 +26,14 @@ namespace ChiecNonKyDieu
             InitializeComponent();
         }
 
+        int s = 90;
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Storyboard sb = (Storyboard)this.vongQuay.FindResource("spin");
-                sb.Begin();
-                sb.SetSpeedRatio(27);//sample data
-            }
-            catch
-            {
-            }
+            Storyboard sb = (Storyboard)this.vongQuay.FindResource("spin");
+            sb.Begin();
+            sb.SetSpeedRatio(s);
+            s -= 5;
         }
-
-        public double Angle
-        {
-            get { return (double)GetValue(AngleProperty); }
-            set { SetValue(AngleProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Angle.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AngleProperty = DependencyProperty.Register("Angle", typeof(double), typeof(MainWindow), new UIPropertyMetadata(0.0, new PropertyChangedCallback(AngleChanged)));
-
-        private static void AngleChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            MainWindow control = (MainWindow)sender;
-            control.PerformAnimation((double)e.OldValue, (double)e.NewValue);
-        }
-
-        private void PerformAnimation(double oldValue, double newValue)
-        {
-            Storyboard s = new Storyboard();
-
-            DoubleAnimation animation = new DoubleAnimation();
-            animation.From = oldValue;
-            animation.To = newValue;
-            animation.Duration = new Duration(TimeSpan.FromSeconds(1));
-            s.Children.Add(animation);
-
-
-            Storyboard.SetTarget(animation, vongQuay);
-            Storyboard.SetTargetProperty(animation, new PropertyPath("(Ellipse.RenderTransform).(RotateTransform.Angle)"));
-
-            s.Begin();
-
-        }
-
-        private void vongQuay_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
+         
     }
 }
