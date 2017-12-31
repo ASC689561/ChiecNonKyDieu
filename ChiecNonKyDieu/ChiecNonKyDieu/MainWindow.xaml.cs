@@ -34,35 +34,15 @@ namespace ChiecNonKyDieu
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            vongQuay = new VongQuay(this.TransRotate);
-            //ComponentDispatcher.ThreadIdle += new System.EventHandler(ComponentDispatcher_ThreadIdle);
-            //Application.id
+            vongQuay = new VongQuay(this.TransRotate, TransRotate_MuiTen);
         }
-
-        //int v = 360;
-        //private void ComponentDispatcher_ThreadIdle(object sender, EventArgs e)
-        //{
-        //    if (v <= 0)
-        //        return;
-
-        //    TransRotate.Angle = v--;
-        //}
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            vongQuay.Start(100);
-        }
+        static Random r = new Random();
 
         private void cvVongQuay_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            vongQuay.Start(100);
+            vongQuay.Start(r.NextDouble());
 
         }
 
-        private void Grid_KeyUp(object sender, KeyEventArgs e)
-        {
-            TransRotate.Angle += 1;
-            Console.WriteLine(TransRotate);
-        }
     }
 }

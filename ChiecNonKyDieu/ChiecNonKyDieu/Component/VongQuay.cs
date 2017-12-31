@@ -13,16 +13,21 @@ namespace ChiecNonKyDieu.Component
 {
     class VongQuay : IVongQuay
     {
-        double currentValue = 0;
-        double step = 2;
-        private RotateTransform transRotate;
-        private List<string> score = new List<string>();
-        public VongQuay(RotateTransform transRotate)
-        {
-            this.transRotate = transRotate;
+        static Random rnd = new Random();
 
-            score.AddRange(new[]
-            {
+        private const int MarkCount = 3;
+        double step = 2;
+        private int Mark;
+        const double padding = 10;
+        double currentValue;
+        double delta = 0.001f;
+        RotateTransform transRotate;
+        RotateTransform transRotate_MuiTen;
+
+        ChangeMonitor<int> IndexMonitor = new ChangeMonitor<int>();
+
+        List<string> score = new List<string>()
+        {
                 "2000",
                 "300",
                 "chia đôi",
@@ -47,15 +52,17 @@ namespace ChiecNonKyDieu.Component
                 "nhân đôi",
                 "500",
                 "100"
-            });
-        }
+        };
 
-        private void ComponentDispatcher_ThreadIdle(object sender, EventArgs e)
+
+
+        public VongQuay(RotateTransform transRotate, RotateTransform transRotate_MuiTen)
         {
-            transRotate.Angle = GetCurrentValue();
+            this.transRotate = transRotate;
+            this.transRotate_MuiTen = transRotate_MuiTen;
+            this.IndexChangedEvent += (o, e) => { Mark = MarkCount; };
         }
 
-        double padding = 10;
 
         private double GetCurrentValue()
         {
@@ -67,12 +74,9 @@ namespace ChiecNonKyDieu.Component
             return currentValue;
         }
 
-        static Random rnd = new Random();
-        double delta = 0.001f;
         public void Start(double value)
         {
-            delta = rnd.NextDouble() * (0.0012f - 0.0005f) + 0.0005f;
-
+            delta = value * (0.0012f - 0.0005f) + 0.0005f;
             step = 2;
             currentValue = 0;
             ComponentDispatcher.ThreadIdle += new EventHandler(ComponentDispatcher_ThreadIdle);
@@ -81,12 +85,69 @@ namespace ChiecNonKyDieu.Component
         public void Stop()
         {
             ComponentDispatcher.ThreadIdle -= new EventHandler(ComponentDispatcher_ThreadIdle);
-            var rate = 360 / score.Count;
-            var frac = Math.Abs((currentValue-7) % 360);
-            var index = frac / rate;
-            Console.WriteLine(score[((int)index) % score.Count]);
+        }
+
+        public int Index
+        {
+            get
+            {
+                var rate = 360 / score.Count;
+                var frac = Math.Abs((currentValue - padding) % 360);
+                var index = frac / rate;
+                Console.WriteLine(score[((int)index) % score.Count]);
+                return ((int)index) % score.Count;
+            }
         }
 
 
+        public event EventHandler<IndexChangedEventArgs> IndexChangedEvent;
+
+        #region MyRegion
+
+        int oldValue = 0;
+
+        private void ComponentDispatcher_ThreadIdle(object sender, EventArgs e)
+        {
+            transRotate.Angle = GetCurrentValue();
+
+            if (oldValue != Index)
+            {
+                IndexChangedEvent?.Invoke(this, new IndexChangedEventArgs { OldIndex = oldValue, NewIndex = Index });
+                oldValue = Index;
+            }
+
+
+            if (Mark > 0)
+            {
+                transRotate_MuiTen.Angle = 10;
+                Mark--;
+            }
+            else
+                transRotate_MuiTen.Angle = 0;
+        }
+
+        #endregion
+
+    }
+
+    public class ChangeMonitor<T>
+    {
+        public T OldValue { get; set; }
+        public event EventHandler<IndexChangedEventArgs<T>> ValueChanged;
+
+        public void NotifyNewValue(T newValue)
+        {
+            if (!OldValue.Equals(newValue))
+            {
+                ValueChanged?.Invoke(this, new IndexChangedEventArgs<T>() { OldIndex = OldValue, NewIndex = newValue });
+                OldValue = newValue;
+            }
+        }
+    }
+
+    public class IndexChangedEventArgs<T> : EventArgs
+    {
+        public T OldIndex { get; set; }
+        public T NewIndex { get; set; }
     }
 }

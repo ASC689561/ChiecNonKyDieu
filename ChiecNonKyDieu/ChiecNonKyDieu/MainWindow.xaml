@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ChiecNonKyDieu"
         mc:Ignorable="d"
         Title="MainWindow" Height="606" Width="1076">
-    <Grid KeyUp="Grid_KeyUp">
+    <Grid  >
         <Grid.Background>
             <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/background.png"/>
         </Grid.Background>
@@ -17,6 +17,16 @@
 
             <Canvas.Background>
                 <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/vongquay.png" Stretch="Uniform"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="49" Margin="518,39,0,0" VerticalAlignment="Top" Width="35"  RenderTransformOrigin="0.5,0.2">
+
+            <Canvas.RenderTransform>
+                <RotateTransform x:Name="TransRotate_MuiTen" CenterX="0" CenterY="0" Angle="0" />
+            </Canvas.RenderTransform>
+
+            <Canvas.Background>
+                <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/mui_ten.png"/>
             </Canvas.Background>
         </Canvas>
     </Grid>
