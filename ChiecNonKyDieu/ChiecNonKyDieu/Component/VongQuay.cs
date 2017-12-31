@@ -8,50 +8,88 @@ using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace ChiecNonKyDieu.Component
 {
+    class FrameMarker
+    {
+        int currentValue;
+
+        public FrameMarker(int n)
+        {
+            this.N = n;
+        }
+
+        public void Mark()
+        {
+            currentValue = N;
+        }
+
+        public bool IsMarked
+        {
+            get
+            {
+                try
+                {
+                    if (currentValue > 0)
+                        return true;
+                    return false;
+                }
+                finally
+                {
+                    currentValue--;
+                }
+            }
+        }
+
+        public int N { get; private set; }
+    }
+
     class VongQuay : IVongQuay
     {
         static Random rnd = new Random();
+        public event EventHandler<IndexChangedEventArgs<RollingValueBase>> ValueChanged;
+        public event EventHandler<RollingCompletedEventArgs> Stopped;
 
-        private const int MarkCount = 3;
-        double step = 2;
-        private int Mark;
         const double padding = 10;
-        double currentValue;
-        double delta = 0.001f;
+
+        public double CurrentValue { get; set; }
+
         RotateTransform transRotate;
         RotateTransform transRotate_MuiTen;
 
+        Decrease decrease = new Decrease(5);
+        FrameMarker maker = new FrameMarker(3);
         ChangeMonitor<int> IndexMonitor = new ChangeMonitor<int>();
+        DispatcherTimer timer;
 
-        List<string> score = new List<string>()
+        List<RollingValueBase> score = new List<RollingValueBase>()
         {
-                "2000",
-                "300",
-                "chia đôi",
-                "700",
-                "900",
-                "200",
-                "thêm lượt",
-                "300",
-                "600",
-                "400",
-                "1000",
-                "mất điểm",
-                "800",
-                "300",
-                "may mắn",
-                "600",
-                "mất lượt",
-                "400",
-                "1000",
-                "700",
-                "200",
-                "nhân đôi",
-                "500",
-                "100"
+               new Scorevalue( 2000),
+               new Scorevalue(300),
+               new ChiaDoi(),
+               new Scorevalue(700),
+                new Scorevalue(900),
+                new Scorevalue(200),
+                new ThemLuot(),
+                new Scorevalue(300),
+                new Scorevalue(600),
+                new Scorevalue(400),
+                new Scorevalue(1000),
+                new MatDiem(),
+                new Scorevalue(800),
+                new Scorevalue(300),
+                new MayMan(),
+                new Scorevalue(600),
+                new MatLuot(),
+                new Scorevalue(400),
+                new Scorevalue(1000),
+                new Scorevalue(700),
+                new Scorevalue(200),
+                new NhanDoi(),
+                new Scorevalue(500),
+                new Scorevalue(100)
         };
 
 
@@ -60,73 +98,109 @@ namespace ChiecNonKyDieu.Component
         {
             this.transRotate = transRotate;
             this.transRotate_MuiTen = transRotate_MuiTen;
-            this.IndexChangedEvent += (o, e) => { Mark = MarkCount; };
+            IndexMonitor.ValueChanged += (o, e) =>
+            {
+                maker.Mark();
+                ValueChanged?.Invoke(this, new IndexChangedEventArgs<RollingValueBase> { OldValue = score[e.OldValue], NewValue = score[e.NewValue] });
+            };
+            timer = new DispatcherTimer(TimeSpan.FromMilliseconds(1),
+                DispatcherPriority.Background,
+                ComponentDispatcher_ThreadIdle,
+                System.Windows.Application.Current.Dispatcher
+            );
         }
 
-
-        private double GetCurrentValue()
-        {
-            Console.WriteLine(currentValue);
-            currentValue -= step;
-            step -= delta;
-            if (step <= 0)
-                Stop();
-            return currentValue;
-        }
 
         public void Start(double value)
         {
-            delta = value * (0.0012f - 0.0005f) + 0.0005f;
-            step = 2;
-            currentValue = 0;
-            ComponentDispatcher.ThreadIdle += new EventHandler(ComponentDispatcher_ThreadIdle);
+            if (value <= 0)
+                value = 0.05;
+            if (value >= 1)
+                value = 0.95;
+
+            decrease.Reset(value);
+            CurrentValue = 0;
+            timer.Start();
         }
 
         public void Stop()
         {
-            ComponentDispatcher.ThreadIdle -= new EventHandler(ComponentDispatcher_ThreadIdle);
+            timer.Stop();
+            Stopped?.Invoke(this, new RollingCompletedEventArgs { CurrentValue = score[CurrentValueIndex] });
+
         }
 
-        public int Index
+        public int CurrentValueIndex
         {
             get
             {
                 var rate = 360 / score.Count;
-                var frac = Math.Abs((currentValue - padding) % 360);
+                var frac = Math.Abs((CurrentValue - padding) % 360);
                 var index = frac / rate;
-                Console.WriteLine(score[((int)index) % score.Count]);
                 return ((int)index) % score.Count;
             }
         }
 
 
-        public event EventHandler<IndexChangedEventArgs> IndexChangedEvent;
+
 
         #region MyRegion
 
-        int oldValue = 0;
+        double GetCurrentAngle()
+        {
+            var step = decrease.Step;
+            CurrentValue -= step;
+            if (step <= 0)
+                Stop();
+            return CurrentValue;
+        }
+
+
+        DateTime lastedTime = DateTime.Now;
 
         private void ComponentDispatcher_ThreadIdle(object sender, EventArgs e)
         {
-            transRotate.Angle = GetCurrentValue();
-
-            if (oldValue != Index)
-            {
-                IndexChangedEvent?.Invoke(this, new IndexChangedEventArgs { OldIndex = oldValue, NewIndex = Index });
-                oldValue = Index;
-            }
+            if ((DateTime.Now - lastedTime).TotalMilliseconds <= 1)
+                return;
 
 
-            if (Mark > 0)
-            {
-                transRotate_MuiTen.Angle = 10;
-                Mark--;
-            }
-            else
-                transRotate_MuiTen.Angle = 0;
+            transRotate.Angle = GetCurrentAngle();
+            IndexMonitor.NotifyNewValue(CurrentValueIndex);
+            transRotate_MuiTen.Angle = maker.IsMarked ? 10 : 0;
+            lastedTime = DateTime.Now;
         }
 
         #endregion
+
+    }
+
+    class Decrease
+    {
+        private const float MinValue = 0.001f;
+        private const float MaxValue = 0.1f;
+        private double delta;
+        private double step;
+        private double stepOriginal;
+
+        public Decrease(double step = 2)
+        {
+            this.stepOriginal = step;
+        }
+
+        public void Reset(double value)
+        {
+            delta = value * (MaxValue - MinValue) + MinValue;
+            step = stepOriginal;
+        }
+
+        public double Step
+        {
+            get
+            {
+                step -= delta;
+                return step;
+            }
+        }
 
     }
 
@@ -139,15 +213,19 @@ namespace ChiecNonKyDieu.Component
         {
             if (!OldValue.Equals(newValue))
             {
-                ValueChanged?.Invoke(this, new IndexChangedEventArgs<T>() { OldIndex = OldValue, NewIndex = newValue });
+                ValueChanged?.Invoke(this, new IndexChangedEventArgs<T>() { OldValue = OldValue, NewValue = newValue });
                 OldValue = newValue;
             }
         }
     }
 
+    public class RollingCompletedEventArgs : EventArgs
+    {
+        public RollingValueBase CurrentValue { get; set; }
+    }
     public class IndexChangedEventArgs<T> : EventArgs
     {
-        public T OldIndex { get; set; }
-        public T NewIndex { get; set; }
+        public T OldValue { get; set; }
+        public T NewValue { get; set; }
     }
 }

@@ -70,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Component\IVongQuay.cs" />
+    <Compile Include="Component\PlayerManager.cs" />
     <Compile Include="Component\VongQuay.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

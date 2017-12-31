@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:ChiecNonKyDieu"
         mc:Ignorable="d"
         Title="MainWindow" Height="606" Width="1076">
-    <Grid  >
+    <Grid   >
         <Grid.Background>
             <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/background.png"/>
         </Grid.Background>
-        <Canvas x:Name="cvVongQuay" HorizontalAlignment="Left" Height="345" Margin="339,79,0,0" VerticalAlignment="Top" Width="391" RenderTransformOrigin="0.5,0.5" MouseUp="cvVongQuay_MouseUp">
+        <Canvas x:Name="cvVongQuay" MouseDown="cvVongQuay_MouseDown" HorizontalAlignment="Left" Height="345" Margin="339,79,0,0" VerticalAlignment="Top" Width="391" RenderTransformOrigin="0.5,0.5" MouseUp="cvVongQuay_MouseUp">
             <Canvas.RenderTransform>
                 <RotateTransform x:Name="TransRotate" CenterX="0" CenterY="0" Angle="0" />
             </Canvas.RenderTransform>
@@ -29,5 +29,69 @@
                 <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/mui_ten.png"/>
             </Canvas.Background>
         </Canvas>
+        <Label x:Name="label" Content="2000" HorizontalAlignment="Left" Margin="427,475,0,0" VerticalAlignment="Top" Foreground="White" FontSize="26.667" FontFamily="Snap ITC" Width="213" HorizontalContentAlignment="Center"/>
+        <ProgressBar x:Name="progressbar" HorizontalAlignment="Left" Height="22" Margin="293,12,0,0" VerticalAlignment="Top" Width="482" Value="50" >
+            <ProgressBar.Resources>
+                <Style TargetType="{x:Type ProgressBar}">
+                    <Setter Property="Foreground" Value="#FF06B025"/>
+                    <Setter Property="Background" Value="#FFE6E6E6"/>
+                    <Setter Property="BorderBrush" Value="#FFBCBCBC"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ProgressBar}">
+                                <Grid x:Name="TemplateRoot">
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="10"/>
+                                    <Rectangle x:Name="PART_Track" />
+                                    <Grid x:Name="PART_Indicator" ClipToBounds="true" HorizontalAlignment="Left">
+                                        <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}" RadiusX="10" RadiusY="10"/>
+                                        <Rectangle x:Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5" RadiusX="10" RadiusY="10">
+                                            <Rectangle.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Rectangle.RenderTransform>
+                                        </Rectangle>
+                                    </Grid>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="Orientation" Value="Vertical">
+                                        <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                                            <Setter.Value>
+                                                <RotateTransform Angle="-90"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsIndeterminate" Value="True">
+                                        <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ProgressBar.Resources>
+        </ProgressBar>
+        <ListBox x:Name="listBox" ItemsSource="{Binding Players}" HorizontalAlignment="Left" Height="384" Margin="96,10,0,0" VerticalAlignment="Top" Width="192">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" CornerRadius="5">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel>
+                                <Label Content="Tên:"/>
+                                <Label Content="{Binding Name}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="Điểm:"/>
+                                <Label Content="{Binding CurrentScore}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
