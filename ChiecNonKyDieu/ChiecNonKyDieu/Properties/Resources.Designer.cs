@@ -73,6 +73,16 @@ namespace ChiecNonKyDieu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap backgroundqa {
+            get {
+                object obj = ResourceManager.GetObject("backgroundqa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mui_ten {
             get {
                 object obj = ResourceManager.GetObject("mui_ten", resourceCulture);

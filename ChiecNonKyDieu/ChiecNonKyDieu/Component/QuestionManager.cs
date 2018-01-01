@@ -16,6 +16,8 @@ namespace ChiecNonKyDieu.Component
     {
         public bool QuestionAnwser()
         {
+            return QuestionAnswer.Instance.Show();
+
             return MessageBox.Show("Tra loi dung ?", "Tra loi", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
         }
     }

@@ -76,7 +76,7 @@
                 </Style>
             </ProgressBar.Resources>
         </ProgressBar>
-        <ListBox x:Name="listBox" ItemsSource="{Binding Players}" HorizontalAlignment="Left" Height="384" Margin="96,10,0,0" VerticalAlignment="Top" Width="192">
+        <ListBox x:Name="listBox" ItemsSource="{Binding Players}" HorizontalAlignment="Left" Height="303" Margin="10,183,0,0" VerticalAlignment="Top" Width="192">
             <ListBox.Resources>
                 <component:BrushColorConverter x:Key="BrushColorConverter"/>
             </ListBox.Resources>
@@ -97,5 +97,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <local:QuestionAnswer Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
+
+
     </Grid>
 </Window>

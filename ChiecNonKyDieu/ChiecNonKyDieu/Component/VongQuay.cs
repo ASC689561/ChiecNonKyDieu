@@ -82,7 +82,7 @@ namespace ChiecNonKyDieu.Component
                 new Scorevalue(300),
                 new Scorevalue(1), //new MayMan(),
                 new Scorevalue(600),
-               new Scorevalue(1), // new MatLuot(),
+                new MatLuot(),
                 new Scorevalue(400),
                 new Scorevalue(1000),
                 new Scorevalue(700),
@@ -121,12 +121,12 @@ namespace ChiecNonKyDieu.Component
                 value = 0.95;
 
             decrease.Reset(value);
-            //CurrentValue = 0;
             timer.Start();
         }
 
         public void Stop()
         {
+            transRotate_MuiTen.Angle = 0;
             timer.Stop();
             Stopped?.Invoke(this, new RollingCompletedEventArgs { CurrentValue = score[CurrentValueIndex] });
 

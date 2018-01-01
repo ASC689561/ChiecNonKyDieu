@@ -1,0 +1,35 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChiecNonKyDieu" 
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" x:Class="ChiecNonKyDieu.QuestionAnswer" 
+                x:Name="abc"
+             mc:Ignorable="d">
+    <UserControl.Background>
+        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/backgroundqa.jpg"/>
+    </UserControl.Background>
+    <StackPanel Orientation="Vertical" >
+        <TextBlock x:Name="textBlock"   Height="137" Margin="0,10,0,0" TextWrapping="Wrap" Text="Chủ tịch nước tên là gì?" VerticalAlignment="Top" HorizontalAlignment="Center" Width="261" FontSize="29.333" Foreground="#FF00DCFF" />
+        <UniformGrid Columns="4" Height="30">
+            <UniformGrid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="4"/>
+                </Style>
+            </UniformGrid.Resources>
+            <Button  Content="A" Click="Button_Click">
+
+            </Button>
+            <Button  Content="B" Click="Button_Click">
+
+            </Button>
+            <Button  Content="C" Click="Button_Click">
+
+            </Button>
+            <Button  Content="D" Click="Button_Click">
+
+            </Button>
+        </UniformGrid>
+    </StackPanel>
+</UserControl>

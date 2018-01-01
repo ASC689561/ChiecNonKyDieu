@@ -65,17 +65,6 @@ namespace ChiecNonKyDieu.Component
         }
     }
 
-    public class ThemLuot : RollingValueBase
-    {
-        public override void Do(IPlayerManager playerManager)
-        {
-            throw new Exception("Khong xu ly"); 
-        }
-        public override string ToString()
-        {
-            return "Thêm lượt";
-        }
-    }
 
     public class MatDiem : RollingValueBase
     {
@@ -99,17 +88,7 @@ namespace ChiecNonKyDieu.Component
             return "Mất điểm";
         }
     }
-    public class MayMan : RollingValueBase
-    {
-        public override void Do(IPlayerManager playerManager)
-        {
-            throw new Exception("Khong xu ly"); 
-        }
-        public override string ToString()
-        {
-            return "May mắn";
-        }
-    }
+
     public class MatLuot : RollingValueBase
     {
         public override void Do(IPlayerManager playerManager)
