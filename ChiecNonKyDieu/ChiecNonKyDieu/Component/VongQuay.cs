@@ -72,7 +72,7 @@ namespace ChiecNonKyDieu.Component
                new Scorevalue(700),
                 new Scorevalue(900),
                 new Scorevalue(200),
-                new ThemLuot(),
+               new Scorevalue(1), // new ThemLuot(),
                 new Scorevalue(300),
                 new Scorevalue(600),
                 new Scorevalue(400),
@@ -80,9 +80,9 @@ namespace ChiecNonKyDieu.Component
                 new MatDiem(),
                 new Scorevalue(800),
                 new Scorevalue(300),
-                new MayMan(),
+                new Scorevalue(1), //new MayMan(),
                 new Scorevalue(600),
-                new MatLuot(),
+               new Scorevalue(1), // new MatLuot(),
                 new Scorevalue(400),
                 new Scorevalue(1000),
                 new Scorevalue(700),
@@ -103,11 +103,13 @@ namespace ChiecNonKyDieu.Component
                 maker.Mark();
                 ValueChanged?.Invoke(this, new IndexChangedEventArgs<RollingValueBase> { OldValue = score[e.OldValue], NewValue = score[e.NewValue] });
             };
+
             timer = new DispatcherTimer(TimeSpan.FromMilliseconds(1),
                 DispatcherPriority.Background,
                 ComponentDispatcher_ThreadIdle,
                 System.Windows.Application.Current.Dispatcher
             );
+            timer.Stop();
         }
 
 
@@ -119,7 +121,7 @@ namespace ChiecNonKyDieu.Component
                 value = 0.95;
 
             decrease.Reset(value);
-            CurrentValue = 0;
+            //CurrentValue = 0;
             timer.Start();
         }
 
@@ -140,9 +142,6 @@ namespace ChiecNonKyDieu.Component
                 return ((int)index) % score.Count;
             }
         }
-
-
-
 
         #region MyRegion
 

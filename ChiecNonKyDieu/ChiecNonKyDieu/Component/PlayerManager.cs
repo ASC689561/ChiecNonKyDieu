@@ -5,9 +5,32 @@ using System.Text;
 
 namespace ChiecNonKyDieu.Component
 {
-    public class Player
+    public class Player : NotifyBase
     {
-        public int CurrentScore { get; set; }
+        bool isActive; int currentScore;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set
+            {
+                isActive = value;
+                base.OnPropertyChanged("IsActive");
+            }
+        }
+
+        public int CurrentScore
+        {
+            get
+            {
+                return currentScore;
+            }
+            set
+            {
+                currentScore = value;
+                base.OnPropertyChanged("CurrentScore");
+            }
+        }
         public string Name { get; set; }
 
         public Player()
@@ -20,78 +43,47 @@ namespace ChiecNonKyDieu.Component
     {
 
     }
-    public class PlayerManager
-    {
-        private IVongQuay vongQuay;
-        public List<Player> Players { get; set; } = new List<Player>();
-        public Player ActivePlayer { get; set; }
 
-        public PlayerManager(IVongQuay vongQuay, int number)
+    public class PlayerManager : IPlayerManager
+    {
+        public IQuestionManager QuestionManager { get; set; } = new QuestionManager();
+        Player activePlayer;
+        public IList<Player> Players { get; set; } = new List<Player>();
+        public Player ActivePlayer
+        {
+            get { return activePlayer; }
+            set
+            {
+                for (int i = 0; i < Players.Count; i++)
+                    Players[i].IsActive = false;
+                activePlayer = value;
+                activePlayer.IsActive = true;
+            }
+        }
+
+
+        public PlayerManager(int number)
         {
             if (number < 0 || number > 4)
                 throw new NumberPlayerInvalidException();
 
-            this.vongQuay = vongQuay;
             for (int i = 0; i < number; i++)
                 Players.Add(new Player());
             this.ActivePlayer = Players.First();
-            vongQuay.Stopped += VongQuay_Stopped;
         }
 
-        private void VongQuay_Stopped(object sender, RollingCompletedEventArgs e)
+        public void ProcessRollingValue(RollingValueBase rollValue)
         {
-            if (e.CurrentValue is Scorevalue)
-                ActivePlayer.CurrentScore += (e.CurrentValue as Scorevalue).Score;
+            rollValue.Do(this);
         }
 
-
-        public void Roll(double speed)
+        public void NextPlayer()
         {
-            vongQuay.Start(speed);
+            var index = Players.IndexOf(activePlayer);
+            index = index + 1;
+            index = index % Players.Count;
+            ActivePlayer = Players[index];
         }
     }
 
-    public abstract class RollingValueBase
-    {
-        public virtual void Do(PlayerManager playerManager)
-        {
-
-        }
-    }
-
-    public class Scorevalue : RollingValueBase
-    {
-        public int Score { get; set; }
-        public Scorevalue(int score)
-        {
-            this.Score = score;
-        }
-    }
-
-    public class ChiaDoi : RollingValueBase
-    {
-
-    }
-
-    public class ThemLuot : RollingValueBase
-    {
-
-    }
-
-    public class MatDiem : RollingValueBase
-    {
-
-    }
-    public class MayMan : RollingValueBase
-    {
-
-    }
-    public class MatLuot : RollingValueBase
-    {
-
-    }
-    public class NhanDoi : RollingValueBase
-    {
-
-    }
 }

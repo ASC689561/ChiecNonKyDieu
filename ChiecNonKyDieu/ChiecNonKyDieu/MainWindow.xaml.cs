@@ -24,8 +24,8 @@ namespace ChiecNonKyDieu
     /// </summary>
     public partial class MainWindow : Window
     {
-        IVongQuay vongQuay;
         static Random r = new Random();
+        IVongQuay vongQuay;
         public PlayerManager PlayerManager { get; set; }
 
         public MainWindow()
@@ -34,17 +34,20 @@ namespace ChiecNonKyDieu
             this.Loaded += MainWindow_Loaded;
         }
 
-
-
         bool mouseHold = false;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             vongQuay = new VongQuay(this.TransRotate, TransRotate_MuiTen);
-            PlayerManager = new PlayerManager(vongQuay, 2);
+            PlayerManager = new PlayerManager(2);
+            vongQuay.Stopped += (o1, e1) =>
+            {
+                PlayerManager.ProcessRollingValue(e1.CurrentValue);
+            };
             vongQuay.ValueChanged += (o, e1) =>
             {
                 label.Content = e1.NewValue;
             };
+
             this.DataContext = PlayerManager;
         }
 
@@ -72,7 +75,7 @@ namespace ChiecNonKyDieu
         private void cvVongQuay_MouseUp(object sender, MouseButtonEventArgs e)
         {
             mouseHold = false;
-            PlayerManager.Roll(1 - progressbar.Value * 1.0 / 100);
+            vongQuay.Start(1 - progressbar.Value * 1.0 / 100);
         }
 
         private void cvVongQuay_MouseDown(object sender, MouseButtonEventArgs e)

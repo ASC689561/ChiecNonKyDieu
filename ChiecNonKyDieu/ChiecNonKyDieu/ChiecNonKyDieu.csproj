@@ -69,8 +69,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Component\Bool2Color.cs" />
+    <Compile Include="Component\IPlayerManager.cs" />
     <Compile Include="Component\IVongQuay.cs" />
+    <Compile Include="Component\NotifyBase.cs" />
     <Compile Include="Component\PlayerManager.cs" />
+    <Compile Include="Component\QuestionManager.cs" />
+    <Compile Include="Component\RollingValue.cs" />
     <Compile Include="Component\VongQuay.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
