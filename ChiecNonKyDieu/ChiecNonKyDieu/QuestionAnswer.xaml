@@ -10,7 +10,7 @@
     <UserControl.Background>
         <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/backgroundqa.jpg"/>
     </UserControl.Background>
-    <StackPanel Orientation="Vertical" >
+    <StackPanel Orientation="Vertical" Margin="20" >
         <TextBlock x:Name="textBlock"   Height="137" Margin="0,10,0,0" TextWrapping="Wrap" Text="Chủ tịch nước tên là gì?" VerticalAlignment="Top" HorizontalAlignment="Center" Width="261" FontSize="29.333" Foreground="#FF00DCFF" />
         <UniformGrid Columns="4" Height="30">
             <UniformGrid.Resources>

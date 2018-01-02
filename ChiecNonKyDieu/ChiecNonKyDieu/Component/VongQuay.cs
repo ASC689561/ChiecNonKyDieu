@@ -44,6 +44,11 @@ namespace ChiecNonKyDieu.Component
         }
 
         public int N { get; private set; }
+
+        internal void Reset()
+        {
+            currentValue = 0;
+        }
     }
 
     class VongQuay : IVongQuay
@@ -66,13 +71,13 @@ namespace ChiecNonKyDieu.Component
 
         List<RollingValueBase> score = new List<RollingValueBase>()
         {
-               new Scorevalue( 2000),
-               new Scorevalue(300),
-               new ChiaDoi(),
-               new Scorevalue(700),
+                new Scorevalue( 2000),
+                new Scorevalue(300),
+                new ChiaDoi(),
+                new Scorevalue(700),
                 new Scorevalue(900),
                 new Scorevalue(200),
-               new Scorevalue(1), // new ThemLuot(),
+                new Scorevalue(1), // new ThemLuot(),
                 new Scorevalue(300),
                 new Scorevalue(600),
                 new Scorevalue(400),
@@ -125,11 +130,11 @@ namespace ChiecNonKyDieu.Component
         }
 
         public void Stop()
-        {
-            transRotate_MuiTen.Angle = 0;
+        { 
             timer.Stop();
             Stopped?.Invoke(this, new RollingCompletedEventArgs { CurrentValue = score[CurrentValueIndex] });
-
+            maker.Reset();
+            transRotate_MuiTen.Angle = 0;
         }
 
         public int CurrentValueIndex

@@ -7,8 +7,9 @@ namespace ChiecNonKyDieu.Component
 {
     public class Player : NotifyBase
     {
-        bool isActive; int currentScore;
-
+        bool isActive;
+        int currentScore;
+        string name;
         public bool IsActive
         {
             get { return isActive; }
@@ -31,7 +32,15 @@ namespace ChiecNonKyDieu.Component
                 base.OnPropertyChanged("CurrentScore");
             }
         }
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                base.OnPropertyChanged("Name");
+            }
+        }
 
         public Player()
         {

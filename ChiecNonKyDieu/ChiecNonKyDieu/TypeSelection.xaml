@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="ChiecNonKyDieu.TypeSelection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChiecNonKyDieu"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UniformGrid Columns="3" Rows="2" Margin="20">
+        <local:TypeButton Clicked="TypeButton_Clicked" Text="Math"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Text="English"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Text="Science"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Text="Toán"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Text="Tiếng việt"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Text="TN &amp; XH" />
+    </UniformGrid>
+</UserControl>

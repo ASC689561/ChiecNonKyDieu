@@ -34,11 +34,52 @@ namespace ChiecNonKyDieu
             this.Loaded += MainWindow_Loaded;
         }
 
+        public void SetPlayer(PlayerManager mgr)
+        {
+            for (int i = 0; i < mgr.Players.Count; i++)
+            {
+                mgr.Players[i].Name = "Player " + (i + 1);
+            }
+            player1.Player = null;
+            player2.Player = null;
+            player3.Player = null;
+            player4.Player = null;
+
+            player1.Visibility = Visibility.Hidden;
+            player2.Visibility = Visibility.Hidden;
+            player3.Visibility = Visibility.Hidden;
+            player4.Visibility = Visibility.Hidden;
+
+            if (mgr.Players.Count > 0)
+            {
+                player1.Player = mgr.Players[0];
+                player1.Visibility = Visibility.Visible;
+            }
+
+            if (mgr.Players.Count > 1)
+            {
+                player2.Player = mgr.Players[1];
+                player2.Visibility = Visibility.Visible;
+            }
+            if (mgr.Players.Count > 2)
+            {
+                player3.Player = mgr.Players[2];
+                player3.Visibility = Visibility.Visible;
+            }
+            if (mgr.Players.Count > 3)
+            {
+                player4.Player = mgr.Players[3];
+                player4.Visibility = Visibility.Visible;
+            }
+        }
+
         bool mouseHold = false;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             vongQuay = new VongQuay(this.TransRotate, TransRotate_MuiTen);
-            PlayerManager = new PlayerManager(2);
+            PlayerManager = new PlayerManager(4);
+            SetPlayer(PlayerManager);
+
             vongQuay.Stopped += (o1, e1) =>
             {
                 PlayerManager.ProcessRollingValue(e1.CurrentValue);

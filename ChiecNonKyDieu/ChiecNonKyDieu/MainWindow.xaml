@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChiecNonKyDieu"
         xmlns:component="clr-namespace:ChiecNonKyDieu.Component"
-        mc:Ignorable="d"
+        mc:Ignorable="d"  
         Title="MainWindow" Height="606" Width="1076">
-    <Grid   >
+    <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/background.png"/>
+            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/background1.jpg"/>
         </Grid.Background>
-        <Canvas x:Name="cvVongQuay" MouseDown="cvVongQuay_MouseDown" HorizontalAlignment="Left" Height="345" Margin="339,79,0,0" VerticalAlignment="Top" Width="391" RenderTransformOrigin="0.5,0.5" MouseUp="cvVongQuay_MouseUp">
+        <Canvas x:Name="cvVongQuay" MouseDown="cvVongQuay_MouseDown"   Height="345" HorizontalAlignment="Center" VerticalAlignment="Center" Width="391" RenderTransformOrigin="0.5,0.5" MouseUp="cvVongQuay_MouseUp">
             <Canvas.RenderTransform>
                 <RotateTransform x:Name="TransRotate" CenterX="0" CenterY="0" Angle="0" />
             </Canvas.RenderTransform>
@@ -20,7 +20,7 @@
                 <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/vongquay.png" Stretch="Uniform"/>
             </Canvas.Background>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="49" Margin="518,39,0,0" VerticalAlignment="Top" Width="35"  RenderTransformOrigin="0.5,0.2">
+        <Canvas  HorizontalAlignment="Center" VerticalAlignment="Center" Height="49" Margin="516,77,516,449"   Width="36"  RenderTransformOrigin="0.5,0.2">
 
             <Canvas.RenderTransform>
                 <RotateTransform x:Name="TransRotate_MuiTen" CenterX="0" CenterY="0" Angle="0" />
@@ -30,8 +30,8 @@
                 <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/mui_ten.png"/>
             </Canvas.Background>
         </Canvas>
-        <Label x:Name="label" Content="2000" HorizontalAlignment="Left" Margin="427,475,0,0" VerticalAlignment="Top" Foreground="White" FontSize="26.667" FontFamily="Snap ITC" Width="213" HorizontalContentAlignment="Center"/>
-        <ProgressBar x:Name="progressbar" HorizontalAlignment="Left" Height="22" Margin="293,12,0,0" VerticalAlignment="Top" Width="482" Value="50" >
+        <Label x:Name="label" Content="2000" HorizontalAlignment="Center" VerticalAlignment="Center" Height="49"    Margin="0,475,0,0"   Foreground="White" FontSize="26.667" FontFamily="Snap ITC" Width="213" HorizontalContentAlignment="Center"/>
+        <ProgressBar VerticalAlignment="Top"  Height="30"      x:Name="progressbar"   Margin="0,12,0,0" Width="482" Value="50" >
             <ProgressBar.Resources>
                 <Style TargetType="{x:Type ProgressBar}">
                     <Setter Property="Foreground" Value="#FF06B025"/>
@@ -76,29 +76,20 @@
                 </Style>
             </ProgressBar.Resources>
         </ProgressBar>
-        <ListBox x:Name="listBox" ItemsSource="{Binding Players}" HorizontalAlignment="Left" Height="303" Margin="10,183,0,0" VerticalAlignment="Top" Width="192">
-            <ListBox.Resources>
-                <component:BrushColorConverter x:Key="BrushColorConverter"/>
-            </ListBox.Resources>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1" CornerRadius="5" Background="{Binding Path=IsActive, Converter={StaticResource BrushColorConverter}}">
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel>
-                                <Label Content="Tên:"/>
-                                <Label Content="{Binding Name}"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <Label Content="Điểm:"/>
-                                <Label Content="{Binding CurrentScore}"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+
+        <UniformGrid Columns="4" Rows="2" Margin="20">
+            <local:PlayerPanel x:Name="player1"  Height="224" Width="225"     />
+            <local:PlayerPanel Visibility="Hidden" Height="224" Width="225"     />
+            <local:PlayerPanel Visibility="Hidden" Height="224" Width="225"    />
+            <local:PlayerPanel x:Name="player2" Height="224" Width="225"     />
+            <local:PlayerPanel x:Name="player3"  Height="224" Width="225"     />
+            <local:PlayerPanel Visibility="Hidden" Height="224" Width="225"     />
+            <local:PlayerPanel Visibility="Hidden" Height="224" Width="225"    />
+            <local:PlayerPanel x:Name="player4" Height="224" Width="225"     />
+        </UniformGrid>
+       
+
         <local:QuestionAnswer Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
-
-
+        <local:TypeSelection Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
     </Grid>
 </Window>
