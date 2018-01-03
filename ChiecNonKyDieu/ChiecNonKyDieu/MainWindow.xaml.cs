@@ -40,6 +40,7 @@ namespace ChiecNonKyDieu
             {
                 mgr.Players[i].Name = "Player " + (i + 1);
             }
+
             player1.Player = null;
             player2.Player = null;
             player3.Player = null;
@@ -76,21 +77,10 @@ namespace ChiecNonKyDieu
         bool mouseHold = false;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            vongQuay = new VongQuay(this.TransRotate, TransRotate_MuiTen);
-            PlayerManager = new PlayerManager(4);
-            SetPlayer(PlayerManager);
-
-            vongQuay.Stopped += (o1, e1) =>
-            {
-                PlayerManager.ProcessRollingValue(e1.CurrentValue);
-            };
-            vongQuay.ValueChanged += (o, e1) =>
-            {
-                label.Content = e1.NewValue;
-            };
-
-            this.DataContext = PlayerManager;
+          
         }
+
+
 
         void StartNewThread()
         {
@@ -123,6 +113,24 @@ namespace ChiecNonKyDieu
         {
             mouseHold = true;
             StartNewThread();
+        }
+
+        private void InitGame(object sender, EventArgs e)
+        {
+            vongQuay = new VongQuay(this.TransRotate, TransRotate_MuiTen);
+            PlayerManager = new PlayerManager(StaticData.SoNguoiChoi);
+            SetPlayer(PlayerManager);
+
+            vongQuay.Stopped += (o1, e1) =>
+            {
+                PlayerManager.ProcessRollingValue(e1.CurrentValue);
+            };
+            vongQuay.ValueChanged += (o, e1) =>
+            {
+                label.Content = e1.NewValue;
+            };
+
+            this.DataContext = PlayerManager;
         }
     }
 }

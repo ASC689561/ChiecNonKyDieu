@@ -6,8 +6,14 @@
         xmlns:local="clr-namespace:ChiecNonKyDieu"
         xmlns:component="clr-namespace:ChiecNonKyDieu.Component"
         mc:Ignorable="d"  
+        WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="606" Width="1076">
+    <Window.Resources>
+         
+        
+    </Window.Resources>
     <Grid>
+        
         <Grid.Background>
             <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/background1.jpg"/>
         </Grid.Background>
@@ -31,7 +37,7 @@
             </Canvas.Background>
         </Canvas>
         <Label x:Name="label" Content="2000" HorizontalAlignment="Center" VerticalAlignment="Center" Height="49"    Margin="0,475,0,0"   Foreground="White" FontSize="26.667" FontFamily="Snap ITC" Width="213" HorizontalContentAlignment="Center"/>
-        <ProgressBar VerticalAlignment="Top"  Height="30"      x:Name="progressbar"   Margin="0,12,0,0" Width="482" Value="50" >
+        <ProgressBar VerticalAlignment="Top"  Height="30"      x:Name="progressbar"   Margin="0,12,0,0" Width="482" Value="0" >
             <ProgressBar.Resources>
                 <Style TargetType="{x:Type ProgressBar}">
                     <Setter Property="Foreground" Value="#FF06B025"/>
@@ -87,9 +93,9 @@
             <local:PlayerPanel Visibility="Hidden" Height="224" Width="225"    />
             <local:PlayerPanel x:Name="player4" Height="224" Width="225"     />
         </UniformGrid>
-       
 
         <local:QuestionAnswer Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
         <local:TypeSelection Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
+        <local:SelectGame Done="InitGame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     </Grid>
 </Window>

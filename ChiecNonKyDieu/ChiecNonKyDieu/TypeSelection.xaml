@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <UniformGrid Columns="3" Rows="2" Margin="20">
-        <local:TypeButton Clicked="TypeButton_Clicked" Text="Math"/>
-        <local:TypeButton Clicked="TypeButton_Clicked" Text="English"/>
-        <local:TypeButton Clicked="TypeButton_Clicked" Text="Science"/>
-        <local:TypeButton Clicked="TypeButton_Clicked" Text="Toán"/>
-        <local:TypeButton Clicked="TypeButton_Clicked" Text="Tiếng việt"/>
-        <local:TypeButton Clicked="TypeButton_Clicked" Text="TN &amp; XH" />
+        <local:TypeButton Clicked="TypeButton_Clicked" Tag="Math" Text="Math"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Tag="English" Text="English"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Tag="Science" Text="Science"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Tag="TOAN" Text="Toán"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Tag="TV" Text="Tiếng việt"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Tag="TNXH" Text="TN &amp; XH" />
     </UniformGrid>
 </UserControl>

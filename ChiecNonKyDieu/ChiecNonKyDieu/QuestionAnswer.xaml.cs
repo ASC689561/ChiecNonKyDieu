@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChiecNonKyDieu.Component;
+using System.IO;
 
 namespace ChiecNonKyDieu
 {
@@ -24,7 +26,7 @@ namespace ChiecNonKyDieu
         const double MaxOpac = 0.95;
         ManualResetEvent mre = new ManualResetEvent(false);
 
-        public bool Correct { get; set; }
+        public string Answer { get; set; }
         public static QuestionAnswer Instance { get; set; }
 
         public QuestionAnswer()
@@ -36,19 +38,16 @@ namespace ChiecNonKyDieu
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
-            Correct = btn.Content.ToString() == "A";
+            Answer = btn.Content.ToString();
             mre.Set();
         }
 
-        public bool Show()
+        public bool Show(string rtf, string goal)
         {
-
-            TypeSelection.Instance.Show();
-
+            richtext.SetRtf(rtf);
             this.Visibility = Visibility.Visible;
             Facein();
             mre.Reset();
-
 
             while (!mre.WaitOne(0))
                 System.Windows.Forms.Application.DoEvents();
@@ -56,8 +55,9 @@ namespace ChiecNonKyDieu
             mre.WaitOne();
             Faceout();
             this.Visibility = Visibility.Collapsed;
-            return Correct;
+            return Answer.ToLower().Trim() == goal.ToLower().Trim();
         }
+
         private void Faceout()
         {
             while (this.Opacity > 0)

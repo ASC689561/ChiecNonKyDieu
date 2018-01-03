@@ -25,6 +25,7 @@ namespace ChiecNonKyDieu
         public double MaxOpac = 0.9;
 
         public static TypeSelection Instance;
+        string Type;
 
         public TypeSelection()
         {
@@ -33,7 +34,7 @@ namespace ChiecNonKyDieu
         }
 
 
-        public void Show()
+        public string Show()
         {
             this.Visibility = Visibility.Visible;
             Facein();
@@ -45,7 +46,9 @@ namespace ChiecNonKyDieu
             mre.WaitOne();
             Faceout();
             Visibility = Visibility.Collapsed;
+            return Type;
         }
+
         private void Faceout()
         {
             while (Opacity > 0)
@@ -70,6 +73,7 @@ namespace ChiecNonKyDieu
         private void TypeButton_Clicked(object sender, EventArgs e)
         {
             mre.Set();
+            this.Type = (sender as TypeButton).Tag.ToString();
         }
     }
 }
