@@ -7,7 +7,7 @@
         xmlns:component="clr-namespace:ChiecNonKyDieu.Component"
         mc:Ignorable="d"  
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="606" Width="1076">
+        Title="Chiếc nón kỳ diệu - The Brendon Primary School" Height="606" Width="1076" Icon="logo.ico">
     <Window.Resources>
          
         
@@ -17,6 +17,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/background1.jpg"/>
         </Grid.Background>
+        
         <Canvas x:Name="cvVongQuay" MouseDown="cvVongQuay_MouseDown"   Height="345" HorizontalAlignment="Center" VerticalAlignment="Center" Width="391" RenderTransformOrigin="0.5,0.5" MouseUp="cvVongQuay_MouseUp">
             <Canvas.RenderTransform>
                 <RotateTransform x:Name="TransRotate" CenterX="0" CenterY="0" Angle="0" />
@@ -97,5 +98,6 @@
         <local:QuestionAnswer Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
         <local:TypeSelection Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
         <local:SelectGame Done="InitGame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Image Height="84" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Source="Resources/logo.png"/>
     </Grid>
 </Window>

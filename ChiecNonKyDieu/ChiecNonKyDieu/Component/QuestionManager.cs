@@ -29,12 +29,14 @@ namespace ChiecNonKyDieu.Component
             Utils.Sleep(2);
             var type = TypeSelection.Instance.Show();
             var question = SelectQuestion(StaticData.Khoi, type);
-            return QuestionAnswer.Instance.Show(question.Rtf, question.Goal);
+            return QuestionAnswer.Instance.Show(question.Rtf,type, question.Goal);
         }
 
 
         private Question SelectQuestion(string khoi, string type)
         {
+            type = type.ToLower();
+            khoi = khoi.ToLower();
             if (!Dic.ContainsKey(khoi) || !Dic[khoi].ContainsKey(type))
                 throw new NoQuestionException();
             var ind = Utils.Random.Next(Dic[khoi][type].Count);
@@ -57,9 +59,9 @@ namespace ChiecNonKyDieu.Component
                 return new FileNameStructure
                 {
                     FileName = fileName,
-                    Goal = arr[2],
-                    Khoi = arr[0],
-                    Loai = arr[1]
+                    Goal = arr[2].ToLower(),
+                    Khoi = arr[0].ToLower(),
+                    Loai = arr[1].ToLower()
                 };
             }
         }

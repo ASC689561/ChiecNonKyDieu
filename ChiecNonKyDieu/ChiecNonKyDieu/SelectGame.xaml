@@ -152,16 +152,16 @@
             <ImageBrush ImageSource="Resources/background.png"/>
         </Grid.Background>
 
+ 
 
-
-        <ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"   x:Name="cbbSoNguoiChoi"  SelectedIndex="0" FontSize="30" Margin="480,213,20,217">
-            <ComboBoxItem   Tag="1" >1 người chơi</ComboBoxItem>
-            <ComboBoxItem  Tag="2" >2 người chơi</ComboBoxItem>
-            <ComboBoxItem  Tag="3" >3 người chơi</ComboBoxItem>
-            <ComboBoxItem  Tag="4" >4 người chơi</ComboBoxItem>
+        <ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"   x:Name="cbbSoNguoiChoi"  SelectedIndex="0" FontSize="30" Margin="0,0,20,191">
+            <ComboBoxItem   Tag="1" >1 nhóm chơi</ComboBoxItem>
+            <ComboBoxItem  Tag="2" >2 nhóm chơi</ComboBoxItem>
+            <ComboBoxItem  Tag="3" >3 nhóm chơi</ComboBoxItem>
+            <ComboBoxItem  Tag="4" >4 nhóm chơi</ComboBoxItem>
         </ComboBox>
 
-        <ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"  x:Name="cbbKhoi"  SelectedIndex="0" FontSize="30" Margin="480,288,20,142">
+        <ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"  x:Name="cbbKhoi"  SelectedIndex="0" FontSize="30" Margin="0,0,20,116">
 
             <ComboBoxItem Tag="Khoi1" >Khối 1</ComboBoxItem>
             <ComboBoxItem Tag="Khoi2" >Khối 2</ComboBoxItem>
@@ -170,7 +170,7 @@
             <ComboBoxItem Tag="Khoi5" >Khối 5</ComboBoxItem>
         </ComboBox>
 
-        <Button Style="{StaticResource GlassButton}"  Height="70" Width="200" FontSize="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Chơi" Click="PlayClick" Margin="480,363,20,67"  />
+        <Button HorizontalAlignment="Right" Style="{StaticResource GlassButton}"  Height="70" Width="200" FontSize="30"  VerticalAlignment="Bottom" Content="Chơi" Click="PlayClick" Margin="0,0,20,41"  />
         <StackPanel>
 
         </StackPanel>

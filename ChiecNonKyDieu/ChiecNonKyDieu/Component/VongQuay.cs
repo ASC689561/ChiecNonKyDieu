@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChiecNonKyDieu.Audio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -77,7 +78,7 @@ namespace ChiecNonKyDieu.Component
                 new Scorevalue(700),
                 new Scorevalue(900),
                 new Scorevalue(200),
-                new Scorevalue(1), // new ThemLuot(),
+                new Scorevalue(600),
                 new Scorevalue(300),
                 new Scorevalue(600),
                 new Scorevalue(400),
@@ -85,8 +86,8 @@ namespace ChiecNonKyDieu.Component
                 new MatDiem(),
                 new Scorevalue(800),
                 new Scorevalue(300),
-                new Scorevalue(1), //new MayMan(),
-                new Scorevalue(600),
+                new Scorevalue(200),
+                new Scorevalue(900),
                 new MatLuot(),
                 new Scorevalue(400),
                 new Scorevalue(1000),
@@ -120,6 +121,8 @@ namespace ChiecNonKyDieu.Component
 
         public void Start(double value)
         {
+            Text2SpeechFacade.PlayFile("resources/nhac_quay.mp3");
+
             if (value <= 0)
                 value = 0.05;
             if (value >= 1)
@@ -130,7 +133,9 @@ namespace ChiecNonKyDieu.Component
         }
 
         public void Stop()
-        { 
+        {
+            Text2SpeechFacade.StopAll();
+
             timer.Stop();
             Stopped?.Invoke(this, new RollingCompletedEventArgs { CurrentValue = score[CurrentValueIndex] });
             maker.Reset();
@@ -166,8 +171,7 @@ namespace ChiecNonKyDieu.Component
         {
             if ((DateTime.Now - lastedTime).TotalMilliseconds <= 1)
                 return;
-
-
+            
             transRotate.Angle = GetCurrentAngle();
             IndexMonitor.NotifyNewValue(CurrentValueIndex);
             transRotate_MuiTen.Angle = maker.IsMarked ? 10 : 0;
@@ -180,8 +184,8 @@ namespace ChiecNonKyDieu.Component
 
     class Decrease
     {
-        private const float MinValue = 0.001f;
-        private const float MaxValue = 0.1f;
+        private const float MinValue = 0.0009f;
+        private const float MaxValue = 0.01f;
         private double delta;
         private double step;
         private double stepOriginal;

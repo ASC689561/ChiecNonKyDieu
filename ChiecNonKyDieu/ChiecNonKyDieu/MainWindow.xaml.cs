@@ -77,10 +77,8 @@ namespace ChiecNonKyDieu
         bool mouseHold = false;
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-          
+
         }
-
-
 
         void StartNewThread()
         {
@@ -106,14 +104,25 @@ namespace ChiecNonKyDieu
         private void cvVongQuay_MouseUp(object sender, MouseButtonEventArgs e)
         {
             mouseHold = false;
+
+            if (lockCount > 0)
+                return;
+
+            lockCount = 1;
             vongQuay.Start(1 - progressbar.Value * 1.0 / 100);
         }
 
         private void cvVongQuay_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (lockCount > 0)
+                return;
+
             mouseHold = true;
             StartNewThread();
         }
+
+        public int lockCount = 0;
+
 
         private void InitGame(object sender, EventArgs e)
         {
@@ -123,7 +132,20 @@ namespace ChiecNonKyDieu
 
             vongQuay.Stopped += (o1, e1) =>
             {
-                PlayerManager.ProcessRollingValue(e1.CurrentValue);
+                try
+                {
+                    PlayerManager.ProcessRollingValue(e1.CurrentValue);
+                }
+                catch (NoQuestionException)
+                {
+                    System.Windows.Forms.MessageBox.Show("Chưa có câu hỏi nào phù hợp với người chơi !");
+                }
+                catch (Exception)
+                {
+
+                }
+
+                this.lockCount = 0;
             };
             vongQuay.ValueChanged += (o, e1) =>
             {

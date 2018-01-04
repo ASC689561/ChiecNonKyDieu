@@ -10,6 +10,7 @@ namespace ChiecNonKyDieu.Component
         bool isActive;
         int currentScore;
         string name;
+
         public bool IsActive
         {
             get { return isActive; }
@@ -84,6 +85,7 @@ namespace ChiecNonKyDieu.Component
         public void ProcessRollingValue(RollingValueBase rollValue)
         {
             rollValue.Do(this);
+            
         }
 
         public void NextPlayer()

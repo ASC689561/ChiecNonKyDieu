@@ -29,7 +29,7 @@
                     </Setter>-->
                     <Setter Property="RenderTransform">
                         <Setter.Value>
-                            <ScaleTransform ScaleX="2" ScaleY="2" />
+                            <ScaleTransform ScaleX="1.2" ScaleY="1.2" />
                         </Setter.Value>
                     </Setter>
                 </Trigger>
@@ -46,6 +46,6 @@
                 <GradientStop Color="White"/>
             </LinearGradientBrush>
         </Border.Background>
-        <Label    RenderTransformOrigin="0.5,0.5" MouseUp="InnerTextBox_MouseUp" HorizontalContentAlignment="Center" VerticalAlignment="Center"  FontSize="30" x:Name="InnerTextBox" Content="{Binding Text,ElementName=control}"/>
+        <Label    RenderTransformOrigin="0.5,0.5" MouseUp="InnerTextBox_MouseUp" HorizontalContentAlignment="Center" VerticalAlignment="Center"  FontSize="60" x:Name="InnerTextBox" Content="{Binding Text,ElementName=control}"/>
     </Border>
 </UserControl>

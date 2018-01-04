@@ -10,35 +10,42 @@
     <UserControl.Background>
         <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/backgroundqa.jpg"/>
     </UserControl.Background>
-    <StackPanel Orientation="Vertical" Margin="20,20,20,0" >
-        <Border BorderThickness="2" CornerRadius="20">
-            <RichTextBox Padding="10" x:Name="richtext" Focusable="False"  Style="{StaticResource RichTextBoxWithRoundedCorners}" >
 
-            </RichTextBox>
-        </Border>
-        
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="20,20,20,0" >
+            <Border BorderThickness="2" CornerRadius="20">
+                <RichTextBox  Background="#FFF4FF86" Padding="10" x:Name="richtext" Focusable="False"  Style="{StaticResource RichTextBoxWithRoundedCorners}" >
 
-        <UniformGrid Columns="4" Margin="0,30,0,0" >
-            <UniformGrid.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="20,0,20,0"/>
-                    <Setter Property="Height" Value="100"/>
-                </Style>
-            </UniformGrid.Resources>
+                </RichTextBox>
+            </Border>
 
-            <Button Margin="20,0,20,0"  Style="{DynamicResource GlassButton}"  Content="A" Click="Button_Click">
-               
-            </Button>
-            <Button  Margin="20,0,20,0"  Style="{DynamicResource GlassButton}"  Content="B" Click="Button_Click">
 
-            </Button>
-            <Button  Margin="20,0,20,0" Style="{DynamicResource GlassButton}"   Content="C" Click="Button_Click">
+            <UniformGrid Columns="4" Margin="0,30,0,0" >
+                <UniformGrid.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="20,0,20,0"/>
+                        <Setter Property="Height" Value="100"/>
+                    </Style>
+                </UniformGrid.Resources>
 
-            </Button>
-            <Button Margin="20,0,20,0"  Style="{DynamicResource GlassButton}"  Content="D" Click="Button_Click">
+                <Button Margin="20,0,20,0"  Style="{DynamicResource GlassButton}"  Content="A" Click="Button_Click">
 
-            </Button>
-        </UniformGrid>
-        <StackPanel/>
-    </StackPanel>
+                </Button>
+                <Button  Margin="20,0,20,0"  Style="{DynamicResource GlassButton}"  Content="B" Click="Button_Click">
+
+                </Button>
+                <Button  Margin="20,0,20,0" Style="{DynamicResource GlassButton}"   Content="C" Click="Button_Click">
+
+                </Button>
+                <Button Margin="20,0,20,0"  Style="{DynamicResource GlassButton}"  Content="D" Click="Button_Click">
+
+                </Button>
+            </UniformGrid>
+            <StackPanel/>
+        </StackPanel>
+
+        <Image x:Name="emoticon_true" Visibility="Hidden" HorizontalAlignment="Center" Height="200" Width="200" VerticalAlignment="Center" Source="Resources/true.png"/>
+        <Image x:Name="emoticon_failed" Visibility="Hidden" HorizontalAlignment="Center" Height="200" Width="200" VerticalAlignment="Center" Source="Resources/failed.png"/>
+    </Grid>
+
 </UserControl>

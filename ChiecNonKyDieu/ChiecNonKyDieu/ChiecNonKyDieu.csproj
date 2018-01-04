@@ -38,12 +38,21 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Effects, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -51,7 +60,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -64,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Audio\IText2Speech.cs" />
+    <Compile Include="Audio\Text2SpeechFacade.cs" />
+    <Compile Include="Audio\GoogleVoiceStream.cs" />
     <Compile Include="Component\IProgress.cs" />
     <Compile Include="Component\StaticData.cs" />
     <Compile Include="Component\Utils.cs" />
@@ -153,16 +164,88 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\Khoi2-TNXH-a-cau5.rtf" />
+    <None Include="Data\Khoi2-TNXH-b-cau4.rtf" />
+    <None Include="Data\Khoi2-TNXH-b-cau7.rtf" />
+    <None Include="Data\Khoi2-TNXH-c-cau1.rtf" />
+    <None Include="Data\Khoi2-TNXH-c-cau2.rtf" />
+    <None Include="Data\Khoi2-TNXH-c-cau3.rtf" />
+    <None Include="Data\Khoi2-TNXH-c-cau6.rtf" />
+    <None Include="Data\Khoi2-TNXH-c-cau8.rtf" />
+    <None Include="Data\Khoi2-TNXH-c-cau9.rtf" />
+    <None Include="Data\Khoi3-English-a-cau3.rtf" />
+    <None Include="Data\Khoi3-English-a-cau9.rtf" />
+    <None Include="Data\Khoi3-English-b-cau10.rtf" />
+    <None Include="Data\Khoi3-English-b-cau5.rtf" />
+    <None Include="Data\Khoi3-English-b-cau7.rtf" />
+    <None Include="Data\Khoi3-English-b-cau8.rtf" />
+    <None Include="Data\Khoi3-English-c-cau2.rtf" />
+    <None Include="Data\Khoi3-English-c-cau6.rtf" />
+    <None Include="Data\Khoi3-English-d-cau1.rtf" />
+    <None Include="Data\Khoi3-English-d-cau4.rtf" />
+    <None Include="Data\Khoi3-Math-a-cau2.rtf" />
+    <None Include="Data\Khoi3-Math-a-cau7.rtf" />
+    <None Include="Data\Khoi3-Math-b-cau1.rtf" />
+    <None Include="Data\Khoi3-Math-b-cau10.rtf" />
+    <None Include="Data\Khoi3-Math-b-cau4.rtf" />
+    <None Include="Data\Khoi3-Math-c-cau5.rtf" />
+    <None Include="Data\Khoi3-Math-c-cau8.rtf" />
+    <None Include="Data\Khoi3-Math-d-cau3.rtf" />
+    <None Include="Data\Khoi3-Math-d-cau6.rtf" />
+    <None Include="Data\Khoi3-Math-d-cau9.rtf" />
+    <None Include="Data\Khoi3-Science-a-cau2.rtf" />
+    <None Include="Data\Khoi3-Science-a-cau3.rtf" />
+    <None Include="Data\Khoi3-Science-a-cau8.rtf" />
+    <None Include="Data\Khoi3-Science-b-cau1.rtf" />
+    <None Include="Data\Khoi3-Science-b-cau9.rtf" />
+    <None Include="Data\Khoi3-Science-c-cau10.rtf" />
+    <None Include="Data\Khoi3-Science-c-cau4.rtf" />
+    <None Include="Data\Khoi3-Science-d-cau5.rtf" />
+    <None Include="Data\Khoi3-Science-d-cau6.rtf" />
+    <None Include="Data\Khoi3-Science-d-cau7.rtf" />
+    <None Include="Data\Khoi5-English-a-cau12.rtf" />
+    <None Include="Data\Khoi5-English-a-cau14.rtf" />
+    <None Include="Data\Khoi5-English-a-cau15.rtf" />
+    <None Include="Data\Khoi5-English-a-cau17.rtf" />
+    <None Include="Data\Khoi5-English-a-cau18.rtf" />
+    <None Include="Data\Khoi5-English-a-cau19.rtf" />
+    <None Include="Data\Khoi5-English-b-cau13.rtf" />
+    <None Include="Data\Khoi5-English-b-cau20.rtf" />
+    <None Include="Data\Khoi5-English-d-cau11.rtf" />
+    <None Include="Data\Khoi5-English-d-cau16.rtf" />
+    <None Include="Data\Khoi5-Math-a-cau13.rtf" />
+    <None Include="Data\Khoi5-Math-a-cau18.rtf" />
+    <None Include="Data\Khoi5-Math-b-cau14.rtf" />
+    <None Include="Data\Khoi5-Math-b-cau16.rtf" />
+    <None Include="Data\Khoi5-Math-b-cau20.rtf" />
+    <None Include="Data\Khoi5-Math-c-cau12.rtf" />
+    <None Include="Data\Khoi5-Math-c-cau17.rtf" />
+    <None Include="Data\Khoi5-Math-d-cau11.rtf" />
+    <None Include="Data\Khoi5-Math-d-cau15.rtf" />
+    <None Include="Data\Khoi5-Math-d-cau19.rtf" />
+    <None Include="Data\Khoi5-Science-a-cau13.rtf" />
+    <None Include="Data\Khoi5-Science-a-cau19.rtf" />
+    <None Include="Data\Khoi5-Science-a-cau20.rtf" />
+    <None Include="Data\Khoi5-Science-b-cau11.rtf" />
+    <None Include="Data\Khoi5-Science-b-cau14.rtf" />
+    <None Include="Data\Khoi5-Science-b-cau18.rtf" />
+    <None Include="Data\Khoi5-Science-c-cau12.rtf" />
+    <None Include="Data\Khoi5-Science-c-cau15.rtf" />
+    <None Include="Data\Khoi5-Science-d-cau16.rtf" />
+    <None Include="Data\Khoi5-Science-d-cau17.rtf" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\vongquay.psd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="logo.ico" />
     <Content Include="Resources\background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -175,13 +258,31 @@
     <Content Include="Resources\editcopy.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\failed.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\failed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\fileopen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\filesave.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\logo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\mui_ten.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\nhac_quay.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Player-Active.png">
@@ -190,13 +291,18 @@
     <Content Include="Resources\Player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\true.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\true.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\vongquay-old.png" />
     <Content Include="Resources\vongquay.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
