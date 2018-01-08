@@ -11,7 +11,7 @@
         <local:TypeButton Clicked="TypeButton_Clicked" Tag="English" Text="English"/>
         <local:TypeButton Clicked="TypeButton_Clicked" Tag="Science" Text="Science"/>
         <local:TypeButton Clicked="TypeButton_Clicked" Tag="Toan" Text="Toán"/>
-        <local:TypeButton Clicked="TypeButton_Clicked" Tag="TV" Text="Tiếng việt"/>
-        <local:TypeButton Clicked="TypeButton_Clicked" Tag="TNXH" Text="TN &amp; XH" />
+        <local:TypeButton Clicked="TypeButton_Clicked" Tag="TiengViet" Text="Tiếng việt"/>
+        <local:TypeButton Clicked="TypeButton_Clicked" Tag="khoaHoc" Text="TN &amp; XH" />
     </UniformGrid>
 </UserControl>

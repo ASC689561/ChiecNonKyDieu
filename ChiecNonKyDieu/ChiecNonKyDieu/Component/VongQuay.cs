@@ -147,7 +147,7 @@ namespace ChiecNonKyDieu.Component
             get
             {
                 var rate = 360 / score.Count;
-                var frac = Math.Abs((CurrentValue - padding) % 360);
+                var frac = Math.Abs((CurrentValue - 7) % 360);
                 var index = frac / rate;
                 return ((int)index) % score.Count;
             }

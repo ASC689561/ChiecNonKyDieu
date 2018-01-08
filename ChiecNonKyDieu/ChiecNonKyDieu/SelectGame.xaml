@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiecNonKyDieu"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"  
              d:DesignHeight="606" d:DesignWidth="1076">
     <UserControl.Resources>
         <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
@@ -152,29 +152,68 @@
             <ImageBrush ImageSource="Resources/background.png"/>
         </Grid.Background>
 
-        <Button x:Name="btnNumberPlayer" Click="NumberPlayerClick" Style="{StaticResource GlassButton}"  Content="1 Nhóm chơi"   HorizontalAlignment="Left" VerticalAlignment="Top" Height="70" Width="205"   FontSize="30" Margin="35,230,0,0"/>
-        <Button x:Name="btnClass" Click="ClassClick"  Style="{StaticResource GlassButton}"  Content="Khối 1"  HorizontalAlignment="Right" VerticalAlignment="Top" Height="70" Width="205"   FontSize="30" Margin="835,230,0,0"/>
+        <TextBlock Margin="10" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" FontSize="30"  Foreground="#FFFFA200" Text="Bản quyền thuộc về trường tiểu học song ngữ BRENDON" />
+
+        <Button x:Name="btnNumberPlayer" Click="NumberPlayerClick" Style="{StaticResource GlassButton}"  Content="1 Nhóm chơi"   HorizontalAlignment="Left" VerticalAlignment="Top" Height="70" Width="197"   FontSize="30" Margin="33,230,0,0"/>
+        <Button x:Name="btnClass" Click="ClassClick"  Style="{StaticResource GlassButton}"  Content="Khối 1"  HorizontalAlignment="Right" VerticalAlignment="Top" Height="70" Width="197"   FontSize="30" Margin="0,230,35,0"/>
+
+        <Button IsDefault="True" HorizontalAlignment="Center" Style="{StaticResource GlassButton}" Foreground="Fuchsia" FontWeight="Bold"  Height="70" Width="300" FontSize="40"  VerticalAlignment="Bottom" Content="Chơi" Click="PlayClick" Margin="0,0,20,41"  />
+
+        <Border  Margin="0,85,0,0" VerticalAlignment="Top" CornerRadius="10" HorizontalAlignment="Center" Width="auto" Height="120" BorderThickness="2" BorderBrush="Red">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FF27C4FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid Margin="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="Foreground" Value="Yellow" ></Setter>
+                        <Setter Property="FontSize" Value="30"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontFamily" Value="Times New Roman"/>
+                    </Style>
+
+                    <Style TargetType="TextBox">
+                        <Setter Property="Foreground" Value="Green" ></Setter>
+                        <Setter Property="FontSize" Value="30"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontFamily" Value="Times New Roman"/>
+                        <Setter Property="Margin" Value="4"/>
+                        <Setter Property="MinWidth" Value="240"/>
+                        <Setter Property="Foreground" Value="Yellow"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </Grid.Resources>
 
 
+                <Image   Grid.Column="0" Grid.Row="0" Source="Resources/user.png" >
 
+                </Image>
+                
+                <TextBox x:Name="txtUser" CharacterCasing="Lower" MaxLength="30" Background="Transparent"  Grid.Column="1" Grid.Row="0"  />
 
-        <!--<ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"   x:Name="cbbSoNguoiChoi"  SelectedIndex="0" FontSize="30" Margin="0,0,20,191">
-            <ComboBoxItem   Tag="1" >1 nhóm chơi</ComboBoxItem>
-            <ComboBoxItem  Tag="2" >2 nhóm chơi</ComboBoxItem>
-            <ComboBoxItem  Tag="3" >3 nhóm chơi</ComboBoxItem>
-            <ComboBoxItem  Tag="4" >4 nhóm chơi</ComboBoxItem>
-        </ComboBox>-->
+                <Image  Grid.Column="0" Grid.Row="1" Source="Resources/lock.png" >
 
-        <!--<ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"  x:Name="cbbKhoi"  SelectedIndex="0" FontSize="30" Margin="0,0,20,116">
+                </Image>
 
-            <ComboBoxItem Tag="Khoi1" >Khối 1</ComboBoxItem>
-            <ComboBoxItem Tag="Khoi2" >Khối 2</ComboBoxItem>
-            <ComboBoxItem Tag="Khoi3" >Khối 3</ComboBoxItem>
-            <ComboBoxItem Tag="Khoi4" >Khối 4</ComboBoxItem>
-            <ComboBoxItem Tag="Khoi5" >Khối 5</ComboBoxItem>
-        </ComboBox>-->
+                <PasswordBox  x:Name="txtPass" FontSize="30" Foreground="Yellow" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxLength="30" Margin="4" BorderThickness="1" Background="Transparent" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
 
-        <Button HorizontalAlignment="Right" Style="{StaticResource GlassButton}"  Height="70" Width="200" FontSize="30"  VerticalAlignment="Bottom" Content="Chơi" Click="PlayClick" Margin="0,0,20,41"  />
+        </Border>
         <StackPanel>
 
         </StackPanel>

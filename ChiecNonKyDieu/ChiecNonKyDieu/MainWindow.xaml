@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:ChiecNonKyDieu"
         xmlns:component="clr-namespace:ChiecNonKyDieu.Component"
         mc:Ignorable="d"  
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="Chiếc nón kỳ diệu - The Brendon Primary School" Height="606" Width="1076" Icon="logo.ico">
+        Title="Vòng quay kỳ diệu - The Brendon Primary School" Height="646" Width="1076" Icon="logo.ico">
     <Window.Resources>
          
         
@@ -97,7 +98,7 @@
 
         <local:QuestionAnswer Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
         <local:TypeSelection Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
-        <local:SelectGame Done="InitGame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-        <Image Height="84" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="84" Source="Resources/logo.png"/>
+        <local:SelectGame x:Name="pnSelectGame" Done="InitGame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Image Height="120" Margin="10,10,10,10" Opacity="0.5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Source="Resources/logo.png"/>
     </Grid>
 </Window>

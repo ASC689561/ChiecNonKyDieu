@@ -97,8 +97,8 @@ namespace ChiecNonKyDieu
                 ["english"] = "en",
                 ["science"] = "en",
                 ["toan"] = "vi",
-                ["tv"] = "vi",
-                ["tnxh"] = "vi",
+                ["tiengviet"] = "vi",
+                ["khoahoc"] = "vi",
             };
 
             string text = new TextRange(richtext.Document.ContentStart, richtext.Document.ContentEnd).Text;

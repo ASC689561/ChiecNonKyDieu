@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:ChiecNonKyDieu"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="SplashScreen" Height="300" Width="500">
+        Title="" Height="300" Width="500">
+    <Window.Background>
+        <ImageBrush ImageSource="Resources/backgroundqa.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
 
     <Grid>
         <Label HorizontalContentAlignment="Center" Margin="0,61,0,0"  VerticalAlignment="Top">Nhập danh sách câu hỏi...</Label>

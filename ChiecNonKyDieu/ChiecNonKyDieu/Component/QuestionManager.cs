@@ -24,12 +24,26 @@ namespace ChiecNonKyDieu.Component
             public string Rtf { get; set; }
             public string Goal { get; set; }
         }
+
         public bool QuestionAnwser()
         {
             Utils.Sleep(2);
-            var type = TypeSelection.Instance.Show();
-            var question = SelectQuestion(StaticData.Khoi, type);
-            return QuestionAnswer.Instance.Show(question.Rtf,type, question.Goal);
+        loop:
+            try
+            {
+                var type = TypeSelection.Instance.Show();
+                var question = SelectQuestion(StaticData.Khoi, type);
+                return QuestionAnswer.Instance.Show(question.Rtf, type, question.Goal);
+            }
+            catch (NoQuestionException ex)
+            {
+                CustomForms.MessageBoxForm.Show("", "Chưa có câu hỏi nào phù hợp với người chơi, Xin mời chọn lại!", MessageBoxButton.OK, CustomForms.MessageBoxImage.Information);
+                goto loop;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 

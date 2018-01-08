@@ -8,7 +8,7 @@
                 x:Name="abc"
              mc:Ignorable="d">
     <UserControl.Background>
-        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/backgroundqa.jpg"/>
+        <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/background2.jpg"/>
     </UserControl.Background>
 
     <Grid>

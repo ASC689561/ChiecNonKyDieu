@@ -136,11 +136,7 @@ namespace ChiecNonKyDieu
                 {
                     PlayerManager.ProcessRollingValue(e1.CurrentValue);
                 }
-                catch (NoQuestionException)
-                {
-                    System.Windows.Forms.MessageBox.Show("Chưa có câu hỏi nào phù hợp với người chơi !");
-                }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
                 }
