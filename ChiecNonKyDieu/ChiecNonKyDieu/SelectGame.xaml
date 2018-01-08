@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ChiecNonKyDieu"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="700">
+             d:DesignHeight="606" d:DesignWidth="1076">
     <UserControl.Resources>
         <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
             <Border x:Name="PART_ContentHost" Focusable="True" />
@@ -152,23 +152,27 @@
             <ImageBrush ImageSource="Resources/background.png"/>
         </Grid.Background>
 
- 
+        <Button x:Name="btnNumberPlayer" Click="NumberPlayerClick" Style="{StaticResource GlassButton}"  Content="1 Nhóm chơi"   HorizontalAlignment="Left" VerticalAlignment="Top" Height="70" Width="205"   FontSize="30" Margin="35,230,0,0"/>
+        <Button x:Name="btnClass" Click="ClassClick"  Style="{StaticResource GlassButton}"  Content="Khối 1"  HorizontalAlignment="Right" VerticalAlignment="Top" Height="70" Width="205"   FontSize="30" Margin="835,230,0,0"/>
 
-        <ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"   x:Name="cbbSoNguoiChoi"  SelectedIndex="0" FontSize="30" Margin="0,0,20,191">
+
+
+
+        <!--<ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"   x:Name="cbbSoNguoiChoi"  SelectedIndex="0" FontSize="30" Margin="0,0,20,191">
             <ComboBoxItem   Tag="1" >1 nhóm chơi</ComboBoxItem>
             <ComboBoxItem  Tag="2" >2 nhóm chơi</ComboBoxItem>
             <ComboBoxItem  Tag="3" >3 nhóm chơi</ComboBoxItem>
             <ComboBoxItem  Tag="4" >4 nhóm chơi</ComboBoxItem>
-        </ComboBox>
+        </ComboBox>-->
 
-        <ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"  x:Name="cbbKhoi"  SelectedIndex="0" FontSize="30" Margin="0,0,20,116">
+        <!--<ComboBox   HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="70" Width="260"  x:Name="cbbKhoi"  SelectedIndex="0" FontSize="30" Margin="0,0,20,116">
 
             <ComboBoxItem Tag="Khoi1" >Khối 1</ComboBoxItem>
             <ComboBoxItem Tag="Khoi2" >Khối 2</ComboBoxItem>
             <ComboBoxItem Tag="Khoi3" >Khối 3</ComboBoxItem>
             <ComboBoxItem Tag="Khoi4" >Khối 4</ComboBoxItem>
             <ComboBoxItem Tag="Khoi5" >Khối 5</ComboBoxItem>
-        </ComboBox>
+        </ComboBox>-->
 
         <Button HorizontalAlignment="Right" Style="{StaticResource GlassButton}"  Height="70" Width="200" FontSize="30"  VerticalAlignment="Bottom" Content="Chơi" Click="PlayClick" Margin="0,0,20,41"  />
         <StackPanel>
