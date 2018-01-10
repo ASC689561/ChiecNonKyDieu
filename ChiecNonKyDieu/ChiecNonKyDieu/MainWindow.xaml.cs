@@ -150,5 +150,19 @@ namespace ChiecNonKyDieu
 
             this.DataContext = PlayerManager;
         }
+        int i = 0;
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.LeftCtrl)
+            {
+                i++;
+            }
+            if (i >= 10)
+            {
+                new AudioDownloader().ShowDialog();
+                i = 0;
+            }
+        }
     }
 }

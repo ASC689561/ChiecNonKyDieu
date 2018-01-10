@@ -26,6 +26,7 @@ namespace ChiecNonKyDieu
             this.Loaded += new RoutedEventHandler(Splash_Loaded);
         }
 
+
         void Splash_Loaded(object sender, RoutedEventArgs e)
         {
             IAsyncResult result = null;

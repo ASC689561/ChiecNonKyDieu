@@ -16,14 +16,19 @@ namespace ChiecNonKyDieu.Component
     {
 
     }
+    public class Question
+    {
+        public string Name { get; set; }
+        public string Rtf { get; set; }
+        public string Goal { get; set; }
+        public string Lang { get; set; }
+
+    }
 
     public class QuestionManager : IQuestionManager
     {
-        class Question
-        {
-            public string Rtf { get; set; }
-            public string Goal { get; set; }
-        }
+
+
 
         public bool QuestionAnwser()
         {
@@ -33,7 +38,7 @@ namespace ChiecNonKyDieu.Component
             {
                 var type = TypeSelection.Instance.Show();
                 var question = SelectQuestion(StaticData.Khoi, type);
-                return QuestionAnswer.Instance.Show(question.Rtf, type, question.Goal);
+                return QuestionAnswer.Instance.Show(question, type);
             }
             catch (NoQuestionException ex)
             {
@@ -57,16 +62,30 @@ namespace ChiecNonKyDieu.Component
             return new Question
             {
                 Rtf = File.ReadAllText(Dic[khoi][type][ind].FileName),
-                Goal = Dic[khoi][type][ind].Goal
+                Goal = Dic[khoi][type][ind].Goal,
+                Name = Path.GetFileNameWithoutExtension(Dic[khoi][type][ind].FileName),
+                Lang = Dic[khoi][type][ind].Lang
             };
         }
 
-        class FileNameStructure
+        public class FileNameStructure
         {
+            static Dictionary<string, string> langDic = new Dictionary<string, string>()
+            {
+                ["math"] = "en",
+                ["english"] = "en",
+                ["science"] = "en",
+                ["toan"] = "vi",
+                ["tiengviet"] = "vi",
+                ["khoahoc"] = "vi",
+            };
+
             public string FileName { get; set; }
             public string Khoi { get; set; }
             public string Goal { get; set; }
             public string Loai { get; set; }
+            public string Lang { get; set; }
+
             public static FileNameStructure Parse(string fileName)
             {
                 var arr = Path.GetFileNameWithoutExtension(fileName).Split('-');
@@ -75,12 +94,13 @@ namespace ChiecNonKyDieu.Component
                     FileName = fileName,
                     Goal = arr[2].ToLower(),
                     Khoi = arr[0].ToLower(),
-                    Loai = arr[1].ToLower()
+                    Loai = arr[1].ToLower(),
+                    Lang = langDic[arr[1].ToLower()]
                 };
             }
         }
 
-        private static Dictionary<string, Dictionary<string, List<FileNameStructure>>> Dic { get; set; }
+        public static Dictionary<string, Dictionary<string, List<FileNameStructure>>> Dic { get; set; }
 
         public static void InitDic(IProgress progressor)
         {

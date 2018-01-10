@@ -13,12 +13,11 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" Margin="20,20,20,0" >
+            <Label Name="tbTime" Content="30" Foreground="Fuchsia" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="40" />
             <Border BorderThickness="2" CornerRadius="20">
                 <RichTextBox  Background="#FFF4FF86" Padding="10" x:Name="richtext" Focusable="False"  Style="{StaticResource RichTextBoxWithRoundedCorners}" >
-
                 </RichTextBox>
             </Border>
-
 
             <UniformGrid Columns="4" Margin="0,30,0,0" >
                 <UniformGrid.Resources>

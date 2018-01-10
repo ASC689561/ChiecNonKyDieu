@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AudioDownloader.xaml.cs">
+      <DependentUpon>AudioDownloader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Audio\IText2Speech.cs" />
     <Compile Include="Audio\Text2SpeechFacade.cs" />
     <Compile Include="Audio\GoogleVoiceStream.cs" />
@@ -106,6 +109,10 @@
     <Compile Include="TypeSelection.xaml.cs">
       <DependentUpon>TypeSelection.xaml</DependentUpon>
     </Compile>
+    <Page Include="AudioDownloader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomForms\MessageBoxForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -152,7 +152,7 @@
             <ImageBrush ImageSource="Resources/background.png"/>
         </Grid.Background>
 
-        <TextBlock Margin="10" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" FontSize="30"  Foreground="#FFFFA200" Text="Bản quyền thuộc về trường tiểu học song ngữ BRENDON" />
+        <TextBlock Margin="10" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" FontSize="30"  Foreground="#FFFFA200" Text="Bản quyền thuộc về trường tiểu học song ngữ BRENDON - Thanh Xuân" />
 
         <Button x:Name="btnNumberPlayer" Click="NumberPlayerClick" Style="{StaticResource GlassButton}"  Content="1 Nhóm chơi"   HorizontalAlignment="Left" VerticalAlignment="Top" Height="70" Width="197"   FontSize="30" Margin="33,230,0,0"/>
         <Button x:Name="btnClass" Click="ClassClick"  Style="{StaticResource GlassButton}"  Content="Khối 1"  HorizontalAlignment="Right" VerticalAlignment="Top" Height="70" Width="197"   FontSize="30" Margin="0,230,35,0"/>
@@ -203,7 +203,7 @@
                 <Image   Grid.Column="0" Grid.Row="0" Source="Resources/user.png" >
 
                 </Image>
-                
+
                 <TextBox x:Name="txtUser" CharacterCasing="Lower" MaxLength="30" Background="Transparent"  Grid.Column="1" Grid.Row="0"  />
 
                 <Image  Grid.Column="0" Grid.Row="1" Source="Resources/lock.png" >

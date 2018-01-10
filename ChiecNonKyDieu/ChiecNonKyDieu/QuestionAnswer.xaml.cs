@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using ChiecNonKyDieu.Component;
 using System.IO;
 using ChiecNonKyDieu.Audio;
+using System.Windows.Threading;
 
 namespace ChiecNonKyDieu
 {
@@ -24,41 +25,77 @@ namespace ChiecNonKyDieu
     /// </summary>
     public partial class QuestionAnswer : UserControl
     {
+        DispatcherTimer _timer;
+        TimeSpan _time;
+
         const double MaxOpac = 0.95;
         ManualResetEvent mre = new ManualResetEvent(false);
-        private string goal;
+        private Question question;
 
-        public string Answer { get; set; }
+        public bool Answer { get; set; }
         public static QuestionAnswer Instance { get; set; }
 
         public QuestionAnswer()
         {
             InitializeComponent();
             Instance = this;
+            _time = TimeSpan.FromSeconds(30);
+
+            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                tbTime.Content = _time.TotalSeconds.ToString();
+                if (_time == TimeSpan.Zero)
+                {
+                    _timer.Stop();
+                    Button_Click(null, null);
+                }
+
+                _time = _time.Add(TimeSpan.FromSeconds(-1));
+
+            }, Application.Current.Dispatcher);
+            _timer.Stop();
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            _timer.Stop();
             this.IsEnabled = false;
             Text2SpeechFacade.StopAll();
+            if ((sender == null))
+            {
+                Answer = false;
+            }
+            else
+            {
+                var btn = sender as Button;
+                Answer = btn.Content.ToString().ToLower().Trim() == question.Goal.ToLower().Trim();
+            }
 
-            var btn = sender as Button;
-            Answer = btn.Content.ToString();
-            ShowTrueFaild(Answer.ToLower().Trim() == goal.ToLower().Trim());
+            ShowTrueFaild(Answer);
             mre.Set();
         }
 
-        public bool Show(string rtf, string type, string goal)
+        public bool Show(Question question, string type)
         {
-            this.IsEnabled = true;
+            this.question = question;
+            IsEnabled = true;
             emoticon_failed.Visibility = Visibility.Hidden;
             emoticon_true.Visibility = Visibility.Hidden;
 
-            this.goal = goal;
-            richtext.SetRtf(rtf);
-            SpeakQuestion(richtext, type);
+
+
+            richtext.SetRtf(question.Rtf);
+
+
             this.Visibility = Visibility.Visible;
             Facein();
+
+            SpeakQuestion(richtext, type);
+            _time = TimeSpan.FromSeconds(30);
+            _timer.Start();
+
+
             mre.Reset();
 
             while (!mre.WaitOne(0))
@@ -68,7 +105,7 @@ namespace ChiecNonKyDieu
             Faceout();
             Visibility = Visibility.Collapsed;
 
-            return Answer.ToLower().Trim() == goal.ToLower().Trim();
+            return Answer;
         }
 
         private void ShowTrueFaild(bool v)
@@ -91,19 +128,9 @@ namespace ChiecNonKyDieu
 
         private void SpeakQuestion(RichTextBox richtext, string type)
         {
-            Dictionary<string, string> dic = new Dictionary<string, string>()
-            {
-                ["math"] = "en",
-                ["english"] = "en",
-                ["science"] = "en",
-                ["toan"] = "vi",
-                ["tiengviet"] = "vi",
-                ["khoahoc"] = "vi",
-            };
-
             string text = new TextRange(richtext.Document.ContentStart, richtext.Document.ContentEnd).Text;
             Text2SpeechFacade.StopAll();
-            Text2SpeechFacade.Play(text, 0, dic[type.ToLower()]);
+            Text2SpeechFacade.PlayWithCache(text, 0, question.Lang, question.Name);
         }
 
         private void Faceout()

@@ -15,15 +15,21 @@ namespace ChiecNonKyDieu.Audio
     {
         private object syn = new object();
 
+        private static string GetUrl(string text, string lang = "vi")
+        {
+            text = text.Replace("?", "");
+            text = text.Replace("...", "ba chấm");
+            text = System.Web.HttpUtility.UrlEncode(text);
+            return $"http://172.104.110.189:12000/text2speech?text={text}&lang={lang}";
+        }
+
         public void Play(string text, CancellationTokenSource ctk, string lang = "vi")
         {
             try
             {
-                text = text.Replace("?", "");
-                text = text.Replace("...", "ba chấm");
-                text = System.Web.HttpUtility.UrlEncode(text);
+
                 lock (syn)
-                      PlayMp3FromUrl($"http://172.104.110.189:12000/text2speech?text={text}&lang={lang}", ctk, 30000);
+                      PlayMp3FromUrl(GetUrl(text, lang), ctk, 30000);
             }
             catch (Exception)
             {
@@ -32,6 +38,16 @@ namespace ChiecNonKyDieu.Audio
 
         }
 
+        public MemoryStream GetStream(string text, string lang = "vi")
+        {
+            byte[] imageData = null;
+
+            using (var wc = new System.Net.WebClient())
+                imageData = wc.DownloadData(GetUrl(text, lang));
+
+            return new MemoryStream(imageData);
+
+        }
         public void PlayFile(string filePath, CancellationTokenSource ctk)
         {
             try
@@ -66,7 +82,7 @@ namespace ChiecNonKyDieu.Audio
             catch (Exception)
             {
 
-            } 
+            }
         }
 
         public void PlayMp3FromUrl(string url, CancellationTokenSource ctk, int timeout = 3000)

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ChiecNonKyDieu.Component;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -48,6 +50,25 @@ namespace ChiecNonKyDieu.Audio
                 cancelTokenSource.Add(ctk);
                 respon.PlayFile(file, ctk);
             });
+        }
+
+
+        public static Task PlayWithCache(string texts, int delayTime = 0, string lang = "vi", string cacheName = "")
+        {
+            string path = "Cache";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            var filePath = Path.Combine(path, Utils.CalculateMD5Hash(texts) + "_" + cacheName + ".mp3");
+            var hashFile = File.Exists(filePath);
+            if (!hashFile)
+            {
+                var s = (respon as GoogleVoiceStream).GetStream(texts, lang);
+                using (var fileStream = File.Create(filePath))
+                {
+                    s.CopyTo(fileStream);
+                }
+            }
+            return PlayFile(filePath);
         }
 
         public static Task Play(string texts, int delayTime = 0, string lang = "vi")

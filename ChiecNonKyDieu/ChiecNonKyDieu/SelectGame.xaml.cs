@@ -29,6 +29,7 @@ namespace ChiecNonKyDieu
             this.Loaded += SelectGame_Loaded;
         }
 
+
         private void SelectGame_Loaded(object sender, RoutedEventArgs e)
         {
             txtUser.Focus();
@@ -63,7 +64,6 @@ namespace ChiecNonKyDieu
                 return;
             }
 
-            
             StaticData.Khoi = classList[classIndex % classList.Count].Item2;
             StaticData.SoNguoiChoi = int.Parse(numberPlayerList[cbbNumberPlayerIndex % numberPlayerList.Count].Item2);
             this.Visibility = Visibility.Hidden;
