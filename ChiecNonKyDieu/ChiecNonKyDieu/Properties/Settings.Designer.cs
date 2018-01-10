@@ -34,5 +34,89 @@ namespace ChiecNonKyDieu.Properties {
                 this["FaceDelay"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int Timeout {
+            get {
+                return ((int)(this["Timeout"]));
+            }
+            set {
+                this["Timeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://172.104.110.189:12000/text2speech?text={0}&lang={1}")]
+        public string SpeechUrl {
+            get {
+                return ((string)(this["SpeechUrl"]));
+            }
+            set {
+                this["SpeechUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0009")]
+        public float MinValue {
+            get {
+                return ((float)(this["MinValue"]));
+            }
+            set {
+                this["MinValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.01")]
+        public float MaxValue {
+            get {
+                return ((float)(this["MaxValue"]));
+            }
+            set {
+                this["MaxValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\Windows NT\\Accessories\\wordpad.exe")]
+        public string Wordpad {
+            get {
+                return ((string)(this["Wordpad"]));
+            }
+            set {
+                this["Wordpad"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("brendon")]
+        public string UserName {
+            get {
+                return ((string)(this["UserName"]));
+            }
+            set {
+                this["UserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("brendon")]
+        public string Pass {
+            get {
+                return ((string)(this["Pass"]));
+            }
+            set {
+                this["Pass"] = value;
+            }
+        }
     }
 }

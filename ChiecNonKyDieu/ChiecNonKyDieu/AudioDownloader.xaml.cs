@@ -1,5 +1,6 @@
 ﻿using ChiecNonKyDieu.Audio;
 using ChiecNonKyDieu.Component;
+using ChiecNonKyDieu.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -97,7 +98,7 @@ namespace ChiecNonKyDieu
         {
             try
             {
-                System.Diagnostics.Process.Start(@"C:\Program Files\Windows NT\Accessories\wordpad.exe", Questions[SelectedIndex].FileName);
+                System.Diagnostics.Process.Start(Settings.Default.Wordpad, Questions[SelectedIndex].FileName);
             }
             catch (Exception ex)
             {

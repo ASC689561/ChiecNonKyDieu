@@ -39,7 +39,7 @@ namespace ChiecNonKyDieu
         {
             InitializeComponent();
             Instance = this;
-            _time = TimeSpan.FromSeconds(30);
+            _time = TimeSpan.FromSeconds(Settings.Default.Timeout);
 
             _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -92,7 +92,7 @@ namespace ChiecNonKyDieu
             Facein();
 
             SpeakQuestion(richtext, type);
-            _time = TimeSpan.FromSeconds(30);
+            _time = TimeSpan.FromSeconds(Settings.Default.Timeout);
             _timer.Start();
 
 

@@ -5,5 +5,26 @@
     <Setting Name="FaceDelay" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
+    <Setting Name="Timeout" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="SpeechUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://172.104.110.189:12000/text2speech?text={0}&amp;lang={1}</Value>
+    </Setting>
+    <Setting Name="MinValue" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.0009</Value>
+    </Setting>
+    <Setting Name="MaxValue" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.01</Value>
+    </Setting>
+    <Setting Name="Wordpad" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\Windows NT\Accessories\wordpad.exe</Value>
+    </Setting>
+    <Setting Name="UserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">brendon</Value>
+    </Setting>
+    <Setting Name="Pass" Type="System.String" Scope="User">
+      <Value Profile="(Default)">brendon</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

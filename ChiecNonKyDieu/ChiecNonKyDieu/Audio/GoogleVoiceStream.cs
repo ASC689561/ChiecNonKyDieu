@@ -1,4 +1,5 @@
-﻿using NAudio.Wave;
+﻿using ChiecNonKyDieu.Properties;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,14 +21,13 @@ namespace ChiecNonKyDieu.Audio
             text = text.Replace("?", "");
             text = text.Replace("...", "ba chấm");
             text = System.Web.HttpUtility.UrlEncode(text);
-            return $"http://172.104.110.189:12000/text2speech?text={text}&lang={lang}";
+            return string.Format(Settings.Default.SpeechUrl, text, lang);
         }
 
         public void Play(string text, CancellationTokenSource ctk, string lang = "vi")
         {
             try
             {
-
                 lock (syn)
                       PlayMp3FromUrl(GetUrl(text, lang), ctk, 30000);
             }

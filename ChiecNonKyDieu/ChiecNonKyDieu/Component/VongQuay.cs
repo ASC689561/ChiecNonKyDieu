@@ -1,4 +1,5 @@
 ﻿using ChiecNonKyDieu.Audio;
+using ChiecNonKyDieu.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -171,7 +172,7 @@ namespace ChiecNonKyDieu.Component
         {
             if ((DateTime.Now - lastedTime).TotalMilliseconds <= 1)
                 return;
-            
+
             transRotate.Angle = GetCurrentAngle();
             IndexMonitor.NotifyNewValue(CurrentValueIndex);
             transRotate_MuiTen.Angle = maker.IsMarked ? 10 : 0;
@@ -184,8 +185,8 @@ namespace ChiecNonKyDieu.Component
 
     class Decrease
     {
-        private const float MinValue = 0.0009f;
-        private const float MaxValue = 0.01f;
+        private float MinValue = Settings.Default.MinValue;
+        private float MaxValue = Settings.Default.MaxValue;
         private double delta;
         private double step;
         private double stepOriginal;

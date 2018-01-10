@@ -27,6 +27,7 @@ namespace ChiecNonKyDieu
         static Random r = new Random();
         IVongQuay vongQuay;
         public PlayerManager PlayerManager { get; set; }
+        bool played = false;
 
         public MainWindow()
         {
@@ -36,6 +37,7 @@ namespace ChiecNonKyDieu
 
         public void SetPlayer(PlayerManager mgr)
         {
+            played = true;
             for (int i = 0; i < mgr.Players.Count; i++)
             {
                 mgr.Players[i].Name = "Player " + (i + 1);
@@ -75,6 +77,7 @@ namespace ChiecNonKyDieu
         }
 
         bool mouseHold = false;
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -150,15 +153,22 @@ namespace ChiecNonKyDieu
 
             this.DataContext = PlayerManager;
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Environment.Exit(0);
+        }
         int i = 0;
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
 
+            if (played)
+                return;
             if (e.Key == Key.LeftCtrl)
             {
                 i++;
             }
-            if (i >= 10)
+            if (i >= 20)
             {
                 new AudioDownloader().ShowDialog();
                 i = 0;

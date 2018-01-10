@@ -27,9 +27,6 @@ namespace ChiecNonKyDieu.Component
 
     public class QuestionManager : IQuestionManager
     {
-
-
-
         public bool QuestionAnwser()
         {
             Utils.Sleep(2);
