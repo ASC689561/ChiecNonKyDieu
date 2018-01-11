@@ -79,7 +79,7 @@ namespace ChiecNonKyDieu.Audio
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }

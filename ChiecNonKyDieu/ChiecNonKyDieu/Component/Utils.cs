@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,31 @@ namespace ChiecNonKyDieu.Component
     {
         public static Random Random = new Random();
 
+        public static string RemoveExcepOne(this string str, string c, string r)
+        {
+            while (str.Contains(c.ToString()))
+            {
+                str = str.Replace(c.ToString(), r);
+            }
+            return str;
+        }
+
+        public static void Combine(string[] inputFiles, Stream output)
+        {
+            foreach (string file in inputFiles)
+            {
+                Mp3FileReader reader = new Mp3FileReader(file);
+                if ((output.Position == 0) && (reader.Id3v2Tag != null))
+                {
+                    output.Write(reader.Id3v2Tag.RawData, 0, reader.Id3v2Tag.RawData.Length);
+                }
+                Mp3Frame frame;
+                while ((frame = reader.ReadNextFrame()) != null)
+                {
+                    output.Write(frame.RawData, 0, frame.RawData.Length);
+                }
+            }
+        }
 
         public static string CalculateMD5Hash(string input)
 

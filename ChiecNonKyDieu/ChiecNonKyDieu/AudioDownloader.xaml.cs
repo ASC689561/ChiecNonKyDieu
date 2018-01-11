@@ -52,7 +52,7 @@ namespace ChiecNonKyDieu
                 {
                     selectedIndex = value;
                     this.richtext.SetRtf(File.ReadAllText(Questions[selectedIndex].FileName));
-                    this.status.Content = "Process file: " + System.IO.Path.GetFileName(Questions[selectedIndex].FileName);
+                    this.status.Text = "Process file: " + System.IO.Path.GetFileName(Questions[selectedIndex].FileName);
                     var text = new TextRange(richtext.Document.ContentStart, richtext.Document.ContentEnd).Text;
                     Text2SpeechFacade.PlayWithCache(text, 0, Questions[selectedIndex].Lang, System.IO.Path.GetFileNameWithoutExtension(Questions[selectedIndex].FileName));
                 }
@@ -84,12 +84,12 @@ namespace ChiecNonKyDieu
                     richtext.SetRtf(text);
                     text = new TextRange(richtext.Document.ContentStart, richtext.Document.ContentEnd).Text;
                     Text2SpeechFacade.PlayWithCache(text, 0, q.Lang, System.IO.Path.GetFileNameWithoutExtension(q.FileName));
-                    this.status.Content = "Process file: " + System.IO.Path.GetFileName(q.FileName);
+                    this.status.Text = "Process file: " + System.IO.Path.GetFileName(q.FileName);
                     System.Windows.Forms.Application.DoEvents();
                 }
                 catch (Exception ex)
                 {
-                    this.status.Content = "Process file failed" + System.IO.Path.GetFileName(q.FileName);
+                    this.status.Text = "Process file failed" + System.IO.Path.GetFileName(q.FileName);
                 }
             }
         }

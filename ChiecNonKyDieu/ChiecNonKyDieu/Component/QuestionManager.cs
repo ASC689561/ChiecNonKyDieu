@@ -103,6 +103,7 @@ namespace ChiecNonKyDieu.Component
         {
             Dic = new Dictionary<string, Dictionary<string, List<FileNameStructure>>>();
             var files = Directory.GetFiles(Utils.GetDataPath());
+            //files = files.Where(x => x.ToLower().Contains("khoi5-tiengviet-b-cau6")).ToArray();
             int i = 0;
             foreach (var item in files)
             {

@@ -15,7 +15,7 @@
             <Button  Margin="4" Content="Next" Click="NextClick"/>
         </UniformGrid>
 
-        <Label Content="" x:Name="status" FontSize="20"/>
+        <TextBox Text="" x:Name="status" FontSize="20"/>
 
         <Border BorderThickness="2" CornerRadius="20">
             <RichTextBox  Background="#FFF4FF86" Padding="10" x:Name="richtext" Focusable="False"  Style="{StaticResource RichTextBoxWithRoundedCorners}" >
