@@ -30,7 +30,7 @@ namespace ChiecNonKyDieu.Audio
             }
         }
 
-        private static string ReplaceSpecialCharacter(string text,string lang)
+        private static string ReplaceSpecialCharacter(string text, string lang)
         {
             if (lang == "vi")
             {
@@ -44,8 +44,8 @@ namespace ChiecNonKyDieu.Audio
                 text = text.RemoveExcepOne("...", "..").Replace("..", " blank ");
                 text = text.Replace("-", " sub ");
             }
-             
-            
+
+
             return text;
         }
 
@@ -76,63 +76,74 @@ namespace ChiecNonKyDieu.Audio
 
         public static Task PlayWithCache(string texts, int delayTime = 0, string lang = "vi", string cacheName = "")
         {
-            texts = ReplaceSpecialCharacter(texts,lang);
-            string path = "Cache";
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            var filePath = Path.Combine(path, Utils.CalculateMD5Hash(texts) + "_" + cacheName + ".mp3");
+            texts = ReplaceSpecialCharacter(texts, lang);
 
-
-            var hashFile = File.Exists(filePath);
-            if (!hashFile)
+            try
             {
-                List<string> files = new List<string>();
-                using (var fileStream = File.Create(filePath))
+                string path = "Cache";
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                var filePath = Path.Combine(path, Utils.CalculateMD5Hash(texts) + "_" + cacheName + ".mp3");
+
+
+                var hashFile = File.Exists(filePath);
+                if (!hashFile)
                 {
-                    foreach (var line in texts.Split(new[] { "\r\n", "." }, StringSplitOptions.RemoveEmptyEntries))
+                    List<string> files = new List<string>();
+                    using (var fileStream = File.Create(filePath))
                     {
-                        var temPath = System.IO.Path.GetRandomFileName();
-                        using (var tmp = File.Create(temPath))
+                        foreach (var line in texts.Split(new[] { "\r\n", "." }, StringSplitOptions.RemoveEmptyEntries))
                         {
-                            for (int i = 0; i < 5; i++)
+                            if (line.ToString().Trim().Length == 0)
+                                continue;
+                            var temPath = Path.Combine(Environment.GetEnvironmentVariable("temp"), System.IO.Path.GetRandomFileName());
+                            using (var tmp = File.Create(temPath))
+                            {
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    try
+                                    {
+                                        var s = (respon as GoogleVoiceStream).GetStream(line, lang);
+                                        s.CopyTo(tmp);
+                                        break;
+                                    }
+                                    catch
+                                    {
+                                        if (i == 4)
+                                            File.AppendAllText("error.log", "error when get data for question:" + cacheName);
+                                    }
+                                }
+
+                            }
+                            files.Add(temPath);
+                            files.Add("Resources/silent.mp3");
+                        }
+
+                        Utils.Combine(files.ToArray(), fileStream);
+                        foreach (var item in files)
+                        {
+                            if (!item.Contains("silent.mp3"))
                             {
                                 try
                                 {
-                                    var s = (respon as GoogleVoiceStream).GetStream(line, lang);
-                                    s.CopyTo(tmp);
-                                    break;
+                                    File.Delete(item);
                                 }
-                                catch
+                                catch (Exception)
                                 {
-                                    if (i == 4)
-                                        File.AppendAllText("error.log", "error when get data for question:" + cacheName);
                                 }
                             }
-
                         }
-                        files.Add(temPath);
-                        files.Add("Resources/silent.mp3");
-                    }
 
-                    Utils.Combine(files.ToArray(), fileStream);
-                    foreach (var item in files)
-                    {
-                        if (!item.Contains("silent.mp3"))
-                        {
-                            try
-                            {
-                                File.Delete(item);
-                            }
-                            catch (Exception)
-                            {
-                            }
-                        }
                     }
-
                 }
+
+                return PlayFile(filePath);
+            }
+            catch (Exception)
+            {
+                return Play(texts, delayTime, lang);
             }
 
-            return PlayFile(filePath);
         }
 
         public static Task Play(string texts, int delayTime = 0, string lang = "vi")
@@ -167,7 +178,6 @@ namespace ChiecNonKyDieu.Audio
                 {
                     PlayCount--;
                 }
-
             });
         }
 

@@ -108,7 +108,7 @@ namespace ChiecNonKyDieu.Component
             int i = 0;
             foreach (var item in files)
             {
-                if (Path.GetExtension(item).ToLower() != "rtf")
+                if (Path.GetExtension(item).ToLower() != ".rtf")
                     continue;
                 i++;
                 progressor.SetProgress(i * 1.0 / files.Length);

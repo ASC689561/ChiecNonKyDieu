@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -35,7 +36,7 @@ namespace ChiecNonKyDieu
             if (Questions.Count > 0)
                 SelectedIndex = 0;
         }
-         
+
         public int SelectedIndex
         {
             get
@@ -78,6 +79,7 @@ namespace ChiecNonKyDieu
         {
             foreach (var q in Questions)
             {
+                Thread.Sleep(1000);
                 try
                 {
                     var text = File.ReadAllText(q.FileName);
