@@ -16,6 +16,7 @@ namespace ChiecNonKyDieu.Component
     {
 
     }
+
     public class Question
     {
         public string Name { get; set; }
@@ -107,6 +108,8 @@ namespace ChiecNonKyDieu.Component
             int i = 0;
             foreach (var item in files)
             {
+                if (Path.GetExtension(item).ToLower() != "rtf")
+                    continue;
                 i++;
                 progressor.SetProgress(i * 1.0 / files.Length);
                 try

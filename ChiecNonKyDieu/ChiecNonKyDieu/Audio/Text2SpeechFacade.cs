@@ -30,11 +30,22 @@ namespace ChiecNonKyDieu.Audio
             }
         }
 
-        private static string ReplaceSpecialCharacter(string text)
+        private static string ReplaceSpecialCharacter(string text,string lang)
         {
-            text = text.RemoveExcepOne("__", "_").Replace("_", " blank ");
-            text = text.RemoveExcepOne("...", "..").Replace("..", " ba chấm ");
-            text = text.Replace("-", " trừ ");
+            if (lang == "vi")
+            {
+                text = text.RemoveExcepOne("__", "_").Replace("_", " ba chấm ");
+                text = text.RemoveExcepOne("...", "..").Replace("..", " ba chấm ");
+                text = text.Replace("-", " trừ ");
+            }
+            else
+            {
+                text = text.RemoveExcepOne("__", "_").Replace("_", " blank ");
+                text = text.RemoveExcepOne("...", "..").Replace("..", " blank ");
+                text = text.Replace("-", " sub ");
+            }
+             
+            
             return text;
         }
 
@@ -65,7 +76,7 @@ namespace ChiecNonKyDieu.Audio
 
         public static Task PlayWithCache(string texts, int delayTime = 0, string lang = "vi", string cacheName = "")
         {
-            texts = ReplaceSpecialCharacter(texts);
+            texts = ReplaceSpecialCharacter(texts,lang);
             string path = "Cache";
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
