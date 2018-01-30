@@ -100,6 +100,6 @@
         <local:QuestionAnswer Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
         <local:TypeSelection Visibility="Collapsed" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Opacity="0"    />
         <local:SelectGame x:Name="pnSelectGame" Done="InitGame" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-        <Image Height="120" Margin="10,10,10,10" Opacity="0.5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Source="Resources/logo.png"/>
+        <Image Height="80" Margin="2,2,10,10" Opacity="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Source="Resources/logo.png"/>
     </Grid>
 </Window>
